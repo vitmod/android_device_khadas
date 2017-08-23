@@ -1,0 +1,2 @@
+# blkid for untrusted block devices
+allow blkid_untrusted vold_block_device:blk_file { getattr read open ioctl };

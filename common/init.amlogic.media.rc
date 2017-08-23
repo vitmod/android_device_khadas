@@ -1,0 +1,23 @@
+on fs
+	insmod /vendor/lib/modules/media_clock.ko
+
+	write /sys/module/firmware_class/parameters/path "/vendor/lib/firmware/"
+	insmod /vendor/lib/modules/firmware.ko
+
+	insmod /vendor/lib/modules/decoder_common.ko
+	insmod /vendor/lib/modules/stream_input.ko
+	insmod /vendor/lib/modules/vavs.ko
+	insmod /vendor/lib/modules/vh264.ko
+	insmod /vendor/lib/modules/vh264_4k2k.ko
+	insmod /vendor/lib/modules/vh264_multi.ko
+	insmod /vendor/lib/modules/vh264_mvc.ko
+	insmod /vendor/lib/modules/vh265.ko
+	insmod /vendor/lib/modules/vmjpeg.ko
+	insmod /vendor/lib/modules/vmjpeg_multi.ko
+	insmod /vendor/lib/modules/vmpeg12.ko
+	insmod /vendor/lib/modules/vmpeg4.ko
+	insmod /vendor/lib/modules/vmpeg4_multi.ko
+	insmod /vendor/lib/modules/vreal.ko
+	insmod /vendor/lib/modules/vvc1.ko
+	insmod /vendor/lib/modules/vvp9.ko
+	insmod /vendor/lib/modules/encoder.ko

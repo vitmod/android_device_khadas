@@ -1,0 +1,4 @@
+allow hal_wifi_default sysfs:file rw_file_perms;
+allow hal_wifi_default self:capability sys_module;
+allow hal_wifi_default proc_modules:file rw_file_perms;
+allow hal_wifi_default { system_file vendor_file }:system module_load;

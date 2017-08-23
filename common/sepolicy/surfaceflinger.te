@@ -1,0 +1,7 @@
+allow surfaceflinger sysfs:file write;
+allow surfaceflinger sysfs_xbmc:file {open read write};
+allow surfaceflinger system_control_service:service_manager find;
+
+get_prop(surfaceflinger, tv_prop)
+set_prop(surfaceflinger, ctl_default_prop)
+allow surfaceflinger dvb_video_device:chr_file rw_file_perms;

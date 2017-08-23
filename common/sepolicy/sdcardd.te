@@ -1,0 +1,2 @@
+allow sdcardd mnt_media_rw_file:dir create_dir_perms;
+allow sdcardd mnt_media_rw_file:file create_file_perms;

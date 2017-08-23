@@ -1,0 +1,14 @@
+allow zygote cpuctl_device:dir search;
+allow zygote self:process execmem;
+allow zygote mediaserver:process { getpgid setpgid };
+
+allow zygote untrusted_app:process ptrace;
+
+allow zygote self:capability sys_nice;
+
+get_prop(zygote, media_prop)
+
+allow zygote kernel:system module_request;
+
+#allow zygote zygote_socket:sock_file { write };
+allow zygote adbd:unix_stream_socket { connectto read write };

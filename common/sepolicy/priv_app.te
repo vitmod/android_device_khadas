@@ -1,0 +1,5 @@
+allow priv_app fuseblk:dir { search };
+allow priv_app fuseblk:file { read open getattr };
+allow priv_app proc_modules:file {getattr};
+allow priv_app media_prop:file {read};
+allow priv_app dvb_device:chr_file rw_file_perms;

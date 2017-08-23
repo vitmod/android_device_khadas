@@ -1,0 +1,100 @@
+ifeq ($(BOARD_SUPPORT_INSTABOOT), true)
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    config.disable_instaboot=false
+
+instaboot_config_file := $(wildcard $(LOCAL_PATH)/instaboot_config.xml)
+
+PRODUCT_COPY_FILES += \
+    $(instaboot_config_file):$(TARGET_COPY_OUT_VENDOR)/etc/instaboot_config.xml
+
+instaboot_rc := $(wildcard $(LOCAL_PATH)/instaboot.rc)
+ifeq ($(instaboot_rc),)
+instaboot_rc := device/amlogic/common/instaboot.rc
+endif
+
+ifneq ($(BOARD_USES_RECOVERY_AS_BOOT), true)
+PRODUCT_COPY_FILES += \
+    $(instaboot_rc):root/instaboot.rc
+else
+PRODUCT_COPY_FILES += \
+    $(instaboot_rc):recovery/root/instaboot.rc
+endif
+
+#WITH_DEXPREOPT := true
+#WITH_DEXPREOPT_PIC := true
+
+PRODUCT_PACKAGES += instabootserver
+endif
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.adb.secure=1
+
+ifeq ($(TARGET_BUILD_CTS), true)
+
+#ADDITIONAL_DEFAULT_PROPERTIES += ro.vold.forceencryption=1
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.screen.landscape.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.screen.landscape.xml \
+    frameworks/native/data/etc/android.software.picture_in_picture.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.picture_in_picture.xml \
+    frameworks/native/data/etc/android.software.voice_recognizers.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.voice_recognizers.xml
+
+ifeq ($(TARGET_BUILD_GOOGLE_ATV), true)
+PRODUCT_COPY_FILES += \
+    device/amlogic/common/android.software.google_atv.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.google_atv.xml
+PRODUCT_PACKAGE_OVERLAYS += device/amlogic/common/atv_gms_overlay
+PRODUCT_PACKAGES += \
+    TvProvider \
+    GooglePackageInstaller \
+    com.android.media.tv.remoteprovider.xml \
+    com.android.media.tv.remoteprovider
+$(call add-clean-step, rm -rf $(OUT_DIR)/vendor/etc/permissions/android.hardware.camera.front.xml)
+$(call add-clean-step, rm -rf $(OUT_DIR)/vendor/priv-app/DLNA)
+
+else
+PRODUCT_PACKAGE_OVERLAYS += device/amlogic/common/aosp_gms_overlay
+PRODUCT_PACKAGES += \
+    QuickSearchBox \
+    Contacts \
+    Calendar \
+    BlockedNumberProvider \
+    BookmarkProvider \
+    MtpDocumentsProvider \
+    DownloadProviderUi
+endif
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.app.rotation=original \
+    media.amplayer.widevineenable=true
+
+#WITH_DEXPREOPT := true
+#WITH_DEXPREOPT_PIC := true
+
+PRODUCT_PACKAGES += \
+    Bluetooth \
+    PrintSpooler
+
+else
+PRODUCT_PACKAGES += \
+    libfwdlockengine
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.app.rotation=middle_port
+
+endif
+
+ifneq ($(TARGET_BUILD_GOOGLE_ATV), true)
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.software.device_admin.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.device_admin.xml
+PRODUCT_PACKAGES += \
+    ManagedProvisioning
+endif
+
+ifeq ($(TARGET_BUILD_NETFLIX), true)
+PRODUCT_COPY_FILES += \
+	device/amlogic/common/droidlogic.software.netflix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/droidlogic.software.netflix.xml
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.nrdp.modelgroup=P212ATV
+endif
+
+$(call inherit-product-if-exists, external/hyphenation-patterns/patterns.mk)
