@@ -14,7 +14,7 @@ endif#ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
 
 BUILT_IMAGES += system.img userdata.img cache.img
 
-ifeq ($(BOARD_KERNEL_VERSION),4.9)
+ifneq ($(BOARD_OLD_PARTITION),true)
 BUILT_IMAGES += vendor.img odm.img
 endif
 
@@ -39,15 +39,6 @@ ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
 endif# ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
 
 $(INSTALLED_BOARDDTB_TARGET) : $(KERNEL_DEVICETREE_SRC) $(INSTALLED_KERNEL_TARGET)
-ifeq ($(BOARD_KERNEL_VERSION),4.9)
-	$(foreach aDts, $(KERNEL_DEVICETREE), \
-		if [ -f "$(KERNEL_ROOTDIR)/$(KERNEL_DEVICETREE_DIR)/$(aDts).dtd" ]; then \
-			$(MAKE) -C $(KERNEL_ROOTDIR) O=../$(KERNEL_OUT) ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) $(strip $(aDts)).dtd; \
-		fi;\
-		$(MAKE) -C $(KERNEL_ROOTDIR) O=../$(KERNEL_OUT) ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) $(strip $(aDts)).dtb; \
-	)
-endif
-ifeq ($(BOARD_KERNEL_VERSION),3.14)
 ifeq ($(AB_OTA_UPDATER),true)
 	$(foreach aDts, $(KERNEL_DEVICETREE), \
 		sed -i 's/^#include \"partition_.*/#include \"$(TARGET_PARTITION_DTSI)\"/' $(KERNEL_ROOTDIR)/$(KERNEL_DEVICETREE_DIR)/$(strip $(aDts)).dts; \
@@ -64,7 +55,6 @@ else
 		fi;\
 		$(MAKE) -C $(KERNEL_ROOTDIR) O=../$(KERNEL_OUT) ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) $(strip $(aDts)).dtb; \
 	)
-endif
 endif
 ifneq ($(strip $(word 2, $(KERNEL_DEVICETREE)) ),)
 	$(hide) $(DTBTOOL) -o $@ -p $(KERNEL_OUT)/scripts/dtc/ $(KERNEL_OUT)/$(KERNEL_DEVICETREE_DIR)
@@ -110,11 +100,10 @@ endif # ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
 PACKAGE_CONFIG_FILE := $(TARGET_DEVICE_DIR)/upgrade/$(PACKAGE_CONFIG_FILE).conf
 
 ifeq ($(wildcard $(PACKAGE_CONFIG_FILE)),)
-ifeq ($(BOARD_KERNEL_VERSION),4.9)
-	PACKAGE_CONFIG_FILE := $(PRODUCT_COMMON_DIR)/upgrade_4.9/$(notdir $(PACKAGE_CONFIG_FILE))
-endif
-ifeq ($(BOARD_KERNEL_VERSION),3.14)
+ifeq ($(BOARD_OLD_PARTITION),true)
 	PACKAGE_CONFIG_FILE := $(PRODUCT_COMMON_DIR)/upgrade_3.14/$(notdir $(PACKAGE_CONFIG_FILE))
+else
+	PACKAGE_CONFIG_FILE := $(PRODUCT_COMMON_DIR)/upgrade_4.9/$(notdir $(PACKAGE_CONFIG_FILE))
 endif
 endif ## ifeq ($(wildcard $(TARGET_DEVICE_DIR)/upgrade/$(PACKAGE_CONFIG_FILE)))
 UPGRADE_FILES += $(PACKAGE_CONFIG_FILE)

@@ -30,7 +30,6 @@ INTERMEDIATES_KERNEL := $(KERNEL_OUT)/arch/$(KERNEL_ARCH)/boot/Image.gz
 TARGET_AMLOGIC_INT_KERNEL := $(KERNEL_OUT)/arch/$(KERNEL_ARCH)/boot/uImage
 TARGET_AMLOGIC_INT_RECOVERY_KERNEL := $(KERNEL_OUT)/arch/$(KERNEL_ARCH)/boot/Image_recovery
 
-ifeq ($(BOARD_KERNEL_VERSION),4.9)
 BOARD_VENDOR_KERNEL_MODULES := $(PRODUCT_OUT)/obj/lib_vendor/audio_data.ko \
 	$(PRODUCT_OUT)/obj/lib_vendor/dhd.ko \
 	$(PRODUCT_OUT)/obj/lib_vendor/media_clock.ko \
@@ -53,19 +52,10 @@ BOARD_VENDOR_KERNEL_MODULES := $(PRODUCT_OUT)/obj/lib_vendor/audio_data.ko \
 	$(PRODUCT_OUT)/obj/lib_vendor/vh265.ko \
 	$(PRODUCT_OUT)/obj/lib_vendor/vmpeg12.ko \
 	$(PRODUCT_OUT)/obj/lib_vendor/vreal.ko
-endif
-ifeq ($(BOARD_KERNEL_VERSION),3.14)
-BOARD_VENDOR_KERNEL_MODULES := $(PRODUCT_OUT)/obj/lib_vendor/dhd.ko
-endif
 
 WIFI_OUT  := $(TARGET_OUT_INTERMEDIATES)/hardware/wifi
 
-ifeq ($(BOARD_KERNEL_VERSION),4.9)
 PREFIX_CROSS_COMPILE=/opt/gcc-linaro-6.3.1-2017.02-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-
-endif
-ifeq ($(BOARD_KERNEL_VERSION),3.14)
-PREFIX_CROSS_COMPILE=aarch64-linux-gnu-
-endif
 
 KERNEL_KO_OUT := $(PRODUCT_OUT)/obj/lib_vendor
 
@@ -88,9 +78,7 @@ $(KERNEL_CONFIG): $(KERNEL_OUT)
 
 BOARD_MKBOOTIMG_ARGS := --second $(PRODUCT_OUT)/dtb.img
 
-ifeq ($(BOARD_KERNEL_VERSION),4.9)
 BOARD_MKBOOTIMG_ARGS += --cmdline "otg_device=1"
-endif
 
 $(INTERMEDIATES_KERNEL): $(KERNEL_OUT) $(KERNEL_CONFIG) $(INSTALLED_BOARDDTB_TARGET)
 	@echo "make Image"
@@ -101,7 +89,7 @@ $(INTERMEDIATES_KERNEL): $(KERNEL_OUT) $(KERNEL_CONFIG) $(INSTALLED_BOARDDTB_TAR
 	$(MAKE) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) -f device/amlogic/common/wifi_driver.mk $(WIFI_MODULE)
 	$(cp-modules)
 	$(media-modules)
-ifeq ($(BOARD_KERNEL_VERSION),3.14)
+ifeq ($(BOARD_OLD_PARTITION),true)
 	cp $(KERNEL_OUT)/net/wireless/cfg80211.ko $(KERNEL_KO_OUT)/
 	mkdir -p $(PRODUCT_OUT)/$(TARGET_COPY_OUT_VENDOR)/lib/modules/
 	cp $(KERNEL_KO_OUT)/* $(PRODUCT_OUT)/$(TARGET_COPY_OUT_VENDOR)/lib/modules/

@@ -17,7 +17,7 @@
 ifneq ($(BOARD_USES_RECOVERY_AS_BOOT), true)
 PRODUCT_COPY_FILES += \
     device/amlogic/common/products/mbox/init.amlogic.rc:root/init.amlogic.rc \
-    device/amlogic/p212/init.amlogic.usb.$(BOARD_KERNEL_VERSION).rc:root/init.amlogic.usb.rc \
+    device/amlogic/p212/init.amlogic.usb.rc:root/init.amlogic.usb.rc \
     device/amlogic/common/products/mbox/ueventd.amlogic.rc:root/ueventd.amlogic.rc \
     device/amlogic/p212/init.amlogic.board.rc:root/init.amlogic.board.rc
 else

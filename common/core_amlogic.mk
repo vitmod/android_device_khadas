@@ -390,12 +390,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.vndk.version=26
 
-# VTS can only be run for Treble enabled devices
-# if kernel version is 3.14 this property is false by default
-ifeq ($(BOARD_KERNEL_VERSION),4.9)
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.treble.enabled=true
-endif
 
 PRODUCT_PACKAGES += \
     libxml2

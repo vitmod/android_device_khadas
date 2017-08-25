@@ -53,8 +53,7 @@ PRODUCT_MANUFACTURER := Amlogic
 
 PRODUCT_TYPE := mbox
 
-#BOARD_KERNEL_VERSION can be 4.9 or 3.14
-BOARD_KERNEL_VERSION := 4.9
+#BOARD_OLD_PARTITION := true
 
 WITH_LIBPLAYER_MODULE := false
 
@@ -128,7 +127,7 @@ PRODUCT_PACKAGES += \
 	fs_mgr \
 	slideshow
 endif
-ifeq ($(BOARD_KERNEL_VERSION),4.9)
+ifneq ($(BOARD_OLD_PARTITION),true)
 ifneq ($(BOARD_USES_RECOVERY_AS_BOOT), true)
 ifeq ($(AB_OTA_UPDATER),true)
 ifeq ($(BUILD_WITH_DM_VERITY), true)
@@ -167,7 +166,7 @@ endif
 endif
 endif
 endif
-ifeq ($(BOARD_KERNEL_VERSION),3.14)
+ifeq ($(BOARD_OLD_PARTITION),true)
 PRODUCT_COPY_FILES += \
     device/amlogic/p212/fstab.3.14.amlogic:root/fstab.amlogic
 endif
