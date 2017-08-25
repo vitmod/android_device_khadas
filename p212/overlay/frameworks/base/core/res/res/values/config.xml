@@ -90,11 +90,4 @@
     </string-array>
     <!--  Maximum number of supported users -->
     <integer name="config_multiuserMaximumUsers">2</integer>
-
-    <!-- Keyguard component -->
-    <string name="config_keyguardComponent" translatable="false">com.droidlogic.tv.settings/com.droidlogic.tv.settings.StubKeyguardService</string>
-
-    <!-- disable wallpaper, which may consume too much boot time -->
-    <bool name="config_enableWallpaperService">false</bool>
-
 </resources>
