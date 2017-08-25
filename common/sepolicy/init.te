@@ -72,4 +72,4 @@ allow init sysfs:file { create };
 allow init cgroup:file create_file_perms;
 allow init kernel:system module_request;
 
-allow init { system_file vendor_file }:system { module_load };
+allow init { system_file vendor_file rootfs}:system { module_load };
