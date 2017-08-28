@@ -15,7 +15,7 @@ endif
 PRODUCT_PACKAGES += \
     remotecfg
 
-USE_CUSTOM_AUDIO_POLICY := 0
+USE_CUSTOM_AUDIO_POLICY := 1
 
 ifneq ($(TARGET_BUILD_GOOGLE_ATV), true)
 # NativeImagePlayer
