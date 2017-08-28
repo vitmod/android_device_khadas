@@ -66,12 +66,20 @@ AB_OTA_PARTITIONS := \
     boot \
     system
 
+ifneq ($(BOARD_OLD_PARTITION),true)
+AB_OTA_PARTITIONS += \
+    vendor \
+    odm
+endif
+
 TARGET_BOOTLOADER_CONTROL_BLOCK := true
 TARGET_NO_RECOVERY := true
 TARGET_PARTITION_DTSI := partition_mbox_ab.dtsi
 else
 TARGET_NO_RECOVERY := false
 TARGET_PARTITION_DTSI := partition_mbox.dtsi
+BOARD_CACHEIMAGE_PARTITION_SIZE := 69206016
+BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 endif
 
 #########Support compiling out encrypted zip/aml_upgrade_package.img directly
@@ -338,7 +346,7 @@ endif
 #########################################################################
 ifeq ($(AB_OTA_UPDATER),true)
 PRODUCT_PACKAGES += \
-    bootctrl.default \
+    bootctrl.avb \
     bootctl
 
 PRODUCT_PACKAGES += \
@@ -346,7 +354,8 @@ PRODUCT_PACKAGES += \
     update_engine_client \
     update_verifier \
     delta_generator \
-    brillo_update_payload
+    brillo_update_payload \
+    android.hardware.boot@1.0-impl
 endif
 #########################################################################
 #

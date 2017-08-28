@@ -14,8 +14,13 @@
 # limitations under the License.
 #
 
+ifeq ($(AB_OTA_UPDATER),true)
+PRODUCT_COPY_FILES += device/amlogic/common/products/mbox/init.amlogic.ab.rc:root/init.amlogic.rc
+else
+PRODUCT_COPY_FILES += device/amlogic/common/products/mbox/init.amlogic.rc:root/init.amlogic.rc
+endif
+
 PRODUCT_COPY_FILES += \
-    device/amlogic/common/products/mbox/init.amlogic.rc:root/init.amlogic.rc \
     device/amlogic/p230/init.amlogic.usb.rc:root/init.amlogic.usb.rc \
     device/amlogic/common/products/mbox/ueventd.amlogic.rc:root/ueventd.amlogic.rc \
     device/amlogic/p230/init.amlogic.board.rc:root/init.amlogic.board.rc
