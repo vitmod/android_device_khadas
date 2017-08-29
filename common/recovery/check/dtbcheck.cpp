@@ -631,6 +631,61 @@ GetDevDtbImage(){
 }
 
 int
+GetEnvPartitionOffset(const ZipArchiveHandle za) {
+    int i = 0;
+    int find = 0;
+    int ret = -1;
+    int offset = 116*1024*1024; //bootloader(4M)  GAP(32M) reserved(64M) GAP(8M) cache(--) GAP(8M)
+    int imageSize = 0;
+    int partition_num_zip = 0;
+
+    ret = GetZipDtbImage(za, DTB_IMG, &imageSize);
+    if ((ret == 0) || (ret == 2)) {
+        printf("no dtb.img in the update or no need check dtb, check dtb over!\n");
+        return 0;
+    } else if (ret < 0) {
+        printf("get dtb.img from update.zip failed!\n");
+        ret = -1;
+        goto END;
+    }
+
+    working_fdt = (struct fdt_header *)s_pDtbBuffer;
+
+    ret = GetPartitionFromDtb("/partitions",  MAX_LEVEL, &partition_num_zip, 0);
+    if (ret  != 0) {
+        printf("get partition map from dtb.img failed!\n");
+        ret = -1;
+        goto END;
+    }
+
+    for (i=0; i<partition_num_zip;i++) {
+        printf("%s:0x%08x\n", dtb_zip[i].partition_name, dtb_zip[i].partition_size);
+        if (!strcmp("cache", dtb_zip[i].partition_name)) {
+                offset += dtb_zip[i].partition_size;
+                find = 1;
+        }
+    }
+
+    if (find == 0) {
+        printf("get cache partition size from dtb.img failed!\n");
+        ret = -1;
+        goto END;
+    }
+    printf("env partition offset:0x%08x\n", offset);
+
+    ret = offset;
+
+END:
+     if (s_pDtbBuffer != NULL)
+    {
+        free(s_pDtbBuffer);
+        s_pDtbBuffer = NULL;
+    }
+
+    return ret;
+}
+
+int
 RecoveryDtbCheck(const ZipArchiveHandle za){
     int i = 0, ret = -1, err = -1;
     int fd = -1;

@@ -81,6 +81,7 @@ static const char *sEmmcPartionName[] = {
 
 int RecoverySecureCheck(const ZipArchiveHandle zipArchive);
 int RecoveryDtbCheck(const ZipArchiveHandle zipArchive);
+int GetEnvPartitionOffset(const ZipArchiveHandle za);
 /*
  * return value: 0 if no error; 1 if path not existed, -1 if access failed
  *
@@ -561,7 +562,7 @@ Value* SetBootloaderEnvFn(const char* name, State* state, const std::vector<std:
     }
 
     //rm backup dtb.img and recovery.img
-    if ((!strcmp(env_name.c_str(), "1")) || (!strcmp(env_val.c_str(), "2"))) {
+    if ((!strcmp(env_val.c_str(), "1")) || (!strcmp(env_val.c_str(), "2"))) {
         struct stat st;
         if (stat("/cache/recovery/dtb.img", &st) == 0) {
             unlink("/cache/recovery/dtb.img");
@@ -659,6 +660,84 @@ Value* RebootRecovery(const char* name, State* state, const std::vector<std::uni
     return ErrorAbort(state, "reboot to recovery failed!\n");
 }
 
+Value* SetUpdateStage(const char* name, State* state, const std::vector<std::unique_ptr<Expr>>& argv) {
+    int ret = 0;
+    if (argv.size() != 1) {
+        return ErrorAbort(state, kArgsParsingFailure, "%s() expects 1 args, got %zu", name, argv.size());
+    }
+
+    std::vector<std::string> args;
+    if (!ReadArgs(state, argv, &args)) {
+        return ErrorAbort(state, kArgsParsingFailure, "%s() Failed to parse the argument(s)", name);
+    }
+
+    const std::string& stage_step = args[0];
+
+    FILE *pf = fopen("/cache/recovery/stage", "w+");
+    if (pf == NULL) {
+        return ErrorAbort(state, "fopen stage failed!\n");
+    }
+
+    int len = fwrite(stage_step.c_str(), 1, strlen(stage_step.c_str()), pf);
+    printf("stage write len:%d, %s\n", len, stage_step.c_str());
+    fflush(pf);
+    fclose(pf);
+
+    return StringValue("done");
+}
+
+Value* GetUpdateStage(const char* name, State* state, const std::vector<std::unique_ptr<Expr>>& argv) {
+    char buff[128] = {0};
+
+    FILE *pf = fopen("/cache/recovery/stage", "r");
+    if (pf == NULL) {
+        return StringValue("0");
+    }
+
+    int len = fread(buff, 1, 128, pf);
+    printf("stage fread len:%d, %s\n", len, buff);
+    fclose(pf);
+
+    return StringValue(buff);
+}
+
+Value* BackupEnvPartition(const char* name, State* state,
+                           const std::vector<std::unique_ptr<Expr>>&argv) {
+    int offset = 0;
+    char tmpbuf[32] = {0};
+    ZipArchiveHandle za = static_cast<UpdaterInfo*>(state->cookie)->package_zip;
+
+    offset = GetEnvPartitionOffset(za);
+    if (offset <= 0) {
+        return ErrorAbort(state, "get env partition offset failed!\n");
+    }
+
+    offset = offset/(1024*1024);
+
+    sprintf(tmpbuf, "%s%d", "seek=", offset);
+    char *args2[7] = {"/sbin/busybox", "dd", "if=/dev/block/env", "of=/dev/block/mmcblk0", "bs=1M"};
+    args2[5] = &tmpbuf[0];
+    args2[6] = nullptr;
+    pid_t child = fork();
+    if (child == 0) {
+        execv("/sbin/busybox", args2);
+        printf("execv failed\n");
+        _exit(EXIT_FAILURE);
+    }
+
+    int status;
+    waitpid(child, &status, 0);
+    if (WIFEXITED(status)) {
+        if (WEXITSTATUS(status) != 0) {
+            ErrorAbort(state,"child exited with status:%d\n", WEXITSTATUS(status));
+        }
+    } else if (WIFSIGNALED(status)) {
+        ErrorAbort(state,"child terminated by signal :%d\n", WTERMSIG(status));
+    }
+
+    return StringValue(strdup("0"));
+}
+
 void Register_libinstall_amlogic() {
     RegisterFunction("write_dtb_image", WriteDtbImageFn);
     RegisterFunction("write_bootloader_image", WriteBootloaderImageFn);
@@ -666,4 +745,7 @@ void Register_libinstall_amlogic() {
     RegisterFunction("backup_data_cache", BackupDataCache);
     RegisterFunction("set_bootloader_env", SetBootloaderEnvFn);
     RegisterFunction("ota_zip_check", OtaZipCheck);
+    RegisterFunction("get_update_stage", GetUpdateStage);
+    RegisterFunction("set_update_stage", SetUpdateStage);
+    RegisterFunction("backup_env_partition", BackupEnvPartition);
 }
