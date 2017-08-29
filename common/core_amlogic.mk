@@ -161,11 +161,14 @@ PRODUCT_PACKAGES += \
     droidlogic-res \
     droidlogic.software.core.xml \
     systemcontrol \
+    systemcontrol_static \
+    libsystemcontrolservice \
+    vendor.amlogic.hardware.systemcontrol@1.0
+
+PRODUCT_PACKAGES += \
     OTAUpgrade \
     VideoPlayer \
     SubTitle    \
-    systemcontrol_static \
-    libsystemcontrolservice \
     libdig \
     ReadLog \
     BluetoothRemote
@@ -324,7 +327,6 @@ PRODUCT_PACKAGES += \
      android.hardware.light@2.0-impl \
      android.hardware.drm@1.0-impl \
      android.hardware.soundtrigger@2.0-impl \
-     android.hardware.keymaster@3.0-impl \
      android.hardware.wifi@1.0-service \
      android.hardware.camera.provider@2.4-impl \
      android.hardware.thermal@1.0-impl \
@@ -333,10 +335,7 @@ PRODUCT_PACKAGES += \
      android.hardware.health@1.0-impl
 
 #android.hardware.biometrics.fingerprint@2.1-service
-#android.hardware.gatekeeper@1.0-impl    \
 #android.hardware.bluetooth@1.0-impl \
-#android.hardware.graphics.composer@2.1-service
-#android.hardware.graphics.allocator@2.0-service
 
 #Audio HAL
 PRODUCT_PACKAGES += \
@@ -356,10 +355,14 @@ PRODUCT_PACKAGES += \
 
 # Gralloc HAL
 PRODUCT_PACKAGES += \
-    android.hardware.graphics.composer@2.1-impl \
     android.hardware.graphics.mapper@2.0-impl \
     android.hardware.graphics.allocator@2.0-impl \
     android.hardware.graphics.allocator@2.0-service
+
+# HW Composer
+PRODUCT_PACKAGES += \
+    android.hardware.graphics.composer@2.1-impl \
+    android.hardware.graphics.composer@2.1-service
 
 # dumpstate binderized
 PRODUCT_PACKAGES += \
@@ -369,6 +372,22 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     context_hub.default \
     android.hardware.contexthub@1.0-impl
+
+# Keymaster HAL
+PRODUCT_PACKAGES += \
+    android.hardware.keymaster@3.0-impl \
+    android.hardware.keymaster@3.0-service
+
+# new gatekeeper HAL
+PRODUCT_PACKAGES += \
+		gatekeeper.amlogic \
+    android.hardware.gatekeeper@1.0-impl \
+    android.hardware.gatekeeper@1.0-service
+
+#DRM
+PRODUCT_PACKAGES += \
+    android.hardware.drm@1.0-impl \
+    android.hardware.drm@1.0-service
 
 ifeq ($(TARGET_BUILD_GOOGLE_ATV), true)
 PRODUCT_IS_ATV := true

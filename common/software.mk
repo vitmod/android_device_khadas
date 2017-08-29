@@ -1,32 +1,3 @@
-ifeq ($(BOARD_SUPPORT_INSTABOOT), true)
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    config.disable_instaboot=false
-
-instaboot_config_file := $(wildcard $(LOCAL_PATH)/instaboot_config.xml)
-
-PRODUCT_COPY_FILES += \
-    $(instaboot_config_file):$(TARGET_COPY_OUT_VENDOR)/etc/instaboot_config.xml
-
-instaboot_rc := $(wildcard $(LOCAL_PATH)/instaboot.rc)
-ifeq ($(instaboot_rc),)
-instaboot_rc := device/amlogic/common/instaboot.rc
-endif
-
-ifneq ($(BOARD_USES_RECOVERY_AS_BOOT), true)
-PRODUCT_COPY_FILES += \
-    $(instaboot_rc):root/instaboot.rc
-else
-PRODUCT_COPY_FILES += \
-    $(instaboot_rc):recovery/root/instaboot.rc
-endif
-
-#WITH_DEXPREOPT := true
-#WITH_DEXPREOPT_PIC := true
-
-PRODUCT_PACKAGES += instabootserver
-endif
-
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.adb.secure=1
 

@@ -12,6 +12,9 @@ allow system_control vndbinder_device:chr_file { read write open ioctl };
 allow system_control vndservicemanager:binder { call transfer };
 #allow system_control default_android_vndservice:service_manager { add };
 
+allow system_control hwservicemanager:binder { call transfer };
+allow system_control { systemcontrol_hwservice  hidl_base_hwservice }:hwservice_manager { add };
+
 allow system_control self:capability dac_override;
 
 allow system_control sysfs:file rw_file_perms;

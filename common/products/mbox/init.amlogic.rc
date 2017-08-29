@@ -369,11 +369,6 @@ on aml-firstboot-init
     wait /dev/block/cache 20
     confirm_formated ext4 /dev/block/cache /cache
 
-service system_control /vendor/bin/systemcontrol
-    class core
-    user root
-    group system
-
 service hdmi_cec /vendor/bin/hdmi_cec
     class core
     user root
