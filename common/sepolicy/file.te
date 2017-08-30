@@ -22,6 +22,7 @@ type param_tv_file, file_type;
 
 #power
 type sysfs_mpgpu_cmd, fs_type, sysfs_type;
+type sysfs_power_trigger, fs_type, sysfs_type;
 
 type sysfs_digital_codec, fs_type, sysfs_type;
 type sysfs_audio_samesource, fs_type, sysfs_type;

@@ -92,7 +92,8 @@
 /sys/class/audiodsp/audio_samesource    			u:object_r:sysfs_audio_samesource:s0
 /sys/class/amhdmitx/amhdmitx0/aud_cap   			u:object_r:sysfs_audio_cap:s0
 
-/sys/class/mpgpu/mpgpucmd			                u:object_r:sysfs_mpgpu_cmd:s0
+/sys/class/mpgpu/mpgpucmd                     u:object_r:sysfs_mpgpu_cmd:s0
+/sys/power/early_suspend_trigger              u:object_r:sysfs_power_trigger:s0
 
 /sys/class/vfm/map   							u:object_r:sysfs_xbmc:s0
 

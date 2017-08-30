@@ -347,6 +347,9 @@ on boot
     chmod 664 /sys/class/mpgpu/scale_mode
     chown system system /sys/class/mpgpu/mpgpucmd
     chmod 664 /sys/class/mpgpu/mpgpucmd
+    #power
+    chmod 664 /sys/power/early_suspend_trigger
+    chown root system /sys/power/early_suspend_trigger
 
     #di detect 3D
     chmod 664 /sys/module/di/parameters/det3d_en

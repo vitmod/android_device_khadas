@@ -15,3 +15,9 @@ allow hal_memtrack_default hal_usb_default:file { open read getattr };
 allow hal_memtrack_default hal_usb_default:dir { search };
 allow hal_memtrack_default hal_power_default:dir { search };
 allow hal_memtrack_default hal_power_default:file { read };
+
+allow hal_memtrack_default { priv_app platform_app untrusted_app }:dir { search };
+allow hal_memtrack_default { priv_app platform_app untrusted_app }:file { read };
+
+allow hal_memtrack_default { logd ueventd vold system_server init }:dir { search };
+allow hal_memtrack_default { logd ueventd vold system_server init }:file { read open getattr };
