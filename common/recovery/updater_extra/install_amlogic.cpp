@@ -102,7 +102,7 @@ static int read_sysfs_val(const char* path, char* rBuf, const unsigned bufSz, in
     }
 
     fd = open(path, O_RDONLY);
-    if (fd <= 0) {
+    if (fd < 0) {
             printf("fail in open[%s] in O_RDONLY\n", path);
             goto _exit;
     }
