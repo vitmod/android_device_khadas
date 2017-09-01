@@ -118,7 +118,7 @@ static int read_sysfs_val(const char* path, char* rBuf, const unsigned bufSz, in
 
     ret = 0;
 _exit:
-    if (fd > 0) close(fd);
+    if (fd >= 0) close(fd);
     return ret;
 }
 
@@ -477,7 +477,7 @@ Value* WriteBootloaderImageFn(const char* name, State* state, const std::vector<
         sprintf(emmcPartitionPath, "/dev/block/%s", sEmmcPartionName[i]);
         if (!access(emmcPartitionPath, F_OK)) {
             sEmmcPartionIndex = i;
-            iRet = block_write_data(args[0]->data.c_str(), _mmcblOffBytes);
+            iRet = block_write_data(args[0]->data, _mmcblOffBytes);
             if (iRet == 0) {
                 printf("Write Uboot Image to %s successful!\n\n", sEmmcPartionName[sEmmcPartionIndex]);
             } else {
@@ -489,7 +489,7 @@ Value* WriteBootloaderImageFn(const char* name, State* state, const std::vector<
     }
 
     sEmmcPartionIndex = USER;
-    iRet = block_write_data(args[0]->data.c_str(), _mmcblOffBytes);
+    iRet = block_write_data(args[0]->data, _mmcblOffBytes);
     if (iRet == 0) {
         printf("Write Uboot Image successful!\n\n");
     } else {
