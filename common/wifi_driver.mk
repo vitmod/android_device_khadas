@@ -6,9 +6,9 @@ TARGET_OUT=$(PRODUCT_OUT)/obj/lib_vendor
 
 define bcmwifi-modules
 	@echo "make wifi module KERNEL_ARCH is $(KERNEL_ARCH)"
-	$(MAKE) -C $(shell pwd)/$(PRODUCT_OUT)/obj/KERNEL_OBJ M=$(shell pwd)/hardware/wifi/broadcom/drivers/ap6xxx/bcmdhd.1.363.59.144.x.cn ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(CROSS_COMPILE) modules
+	$(MAKE) -C $(shell pwd)/$(PRODUCT_OUT)/obj/KERNEL_OBJ M=$(shell pwd)/hardware/wifi/broadcom/drivers/ap6xxx/bcmdhd.1.579.77.41.1.cn ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(CROSS_COMPILE) modules
 	mkdir -p $(TARGET_OUT)/
-	cp $(shell pwd)/hardware/wifi/broadcom/drivers/ap6xxx/bcmdhd.1.363.59.144.x.cn/dhd.ko $(TARGET_OUT)/
+	cp $(shell pwd)/hardware/wifi/broadcom/drivers/ap6xxx/bcmdhd.1.579.77.41.1.cn/dhd.ko $(TARGET_OUT)/
 	#cp $(shell pwd)/$(PRODUCT_OUT)/obj/KERNEL_OBJ/net/wireless/cfg80211.ko $(TARGET_OUT)/
 endef
 
