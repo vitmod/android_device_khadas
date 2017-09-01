@@ -143,11 +143,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     rw.camera.usb.faceback=true
 
-SKIP_BOOT_JARS_CHECK = true
-
-PRODUCT_BOOT_JARS += \
-    droidlogic
-
 ifneq ($(TARGET_BUILD_GOOGLE_ATV), true)
 PRODUCT_PACKAGES += \
     AppInstaller \
@@ -165,6 +160,7 @@ endif
 PRODUCT_PACKAGES += \
     droidlogic \
     droidlogic-res \
+    droidlogic.software.core.xml \
     systemcontrol \
     OTAUpgrade \
     VideoPlayer \
