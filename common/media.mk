@@ -39,33 +39,21 @@ ifeq ($(BOARD_PLAYREADY_LEVEL),1)
     BUILD_WITH_PLAYREADY_DRM := true
     BOARD_PLAYREADY_TVP := true
     TARGET_USE_OPTEEOS := true
-    ifeq ($(BOARD_PLAYREADY_LP_IN_SS),)
-        BOARD_PLAYREADY_LP_IN_SS := true
-    endif
 else
 ifeq ($(BOARD_PLAYREADY_LEVEL), 3)
     BUILD_WITH_PLAYREADY_DRM := true
-    ifeq ($(BOARD_PLAYREADY_LP_IN_SS),)
-        BOARD_PLAYREADY_LP_IN_SS := true
-    endif
 endif
 endif
 
 ifeq ($(BUILD_WITH_PLAYREADY_DRM),true)
 
-PRODUCT_PACKAGES += libdrmplayreadyplugin \
-  libsmoothstreaming_test \
-  libsmoothstreaming \
-  libplayreadymediadrmplugin\
-  playready \
-  libdrmclientplayreadyplugin \
+PRODUCT_PACKAGES += libplayreadymediadrmplugin \
+  libplayready \
   9a04f079-9840-4286-ab92e65be0885f95
 
 PRODUCT_COPY_FILES += \
     vendor/playready/playreadyplugin/keycert/zgpriv.dat:$(TARGET_COPY_OUT_VENDOR)/etc/drm/playready/zgpriv.dat \
     vendor/playready/playreadyplugin/keycert/bgroupcert.dat:$(TARGET_COPY_OUT_VENDOR)/etc/drm/playready/bgroupcert.dat \
-    vendor/playready/playreadyplugin/keycert/devcerttemplate.dat:$(TARGET_COPY_OUT_VENDOR)/etc/drm/playready/devcerttemplate.dat \
-    vendor/playready/playreadyplugin/keycert/priv.dat:$(TARGET_COPY_OUT_VENDOR)/etc/drm/playready/priv.dat \
     vendor/playready/playreadyplugin/keycert/zgpriv_protected.dat:$(TARGET_COPY_OUT_VENDOR)/etc/drm/playready/zgpriv_protected.dat
 
 endif
