@@ -366,10 +366,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.dumpstate@1.0-service.droidlogic
 
-#context hub hal
-PRODUCT_PACKAGES += \
-    context_hub.default \
-    android.hardware.contexthub@1.0-impl
 
 ifeq ($(TARGET_BUILD_GOOGLE_ATV), true)
 PRODUCT_IS_ATV := true
