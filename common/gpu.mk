@@ -13,4 +13,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+GPU_MODS_OUT?=vendor/lib
 include hardware/arm/gpu/gpu.mk
