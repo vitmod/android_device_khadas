@@ -27,3 +27,6 @@ allow system_server { system_app platform_app untrusted_app priv_app }:file { wr
 allow system_server uhid_device:chr_file {write open ioctl};
 allow system_server dvb_device:chr_file rw_file_perms;
 allow system_server uhid_device:chr_file { write open ioctl };
+
+allow system_server socket_device:sock_file { read write open };
+

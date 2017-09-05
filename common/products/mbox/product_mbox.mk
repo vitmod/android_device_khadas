@@ -27,7 +27,9 @@ PRODUCT_PACKAGES += \
     MboxLauncher
 endif
 
-
+#droid vold
+PRODUCT_PACKAGES += \
+    droidvold
 
 # Camera Hal
 PRODUCT_PACKAGES += \
