@@ -90,4 +90,8 @@
     </string-array>
     <!--  Maximum number of supported users -->
     <integer name="config_multiuserMaximumUsers">2</integer>
+
+    <bool name="config_defaultInTouchMode">false</bool>
+    <!-- Whether the device uses the default focus highlight when focus state isn't specified. -->
+    <bool name="config_useDefaultFocusHighlight">false</bool>
 </resources>
