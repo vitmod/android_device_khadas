@@ -17,11 +17,7 @@ $(INSTALLED_KERNEL_TARGET): $(TARGET_PREBUILT_KERNEL) | $(ACP)
 
 else
 
-ifeq ($(AB_OTA_UPDATER),true)
-KERNEL_DEVICETREE := gxl_p212_2g_AB
-else
 KERNEL_DEVICETREE := gxl_p212_2g
-endif
 KERNEL_DEFCONFIG := meson64_defconfig
 KERNEL_ARCH := arm64
 

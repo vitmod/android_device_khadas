@@ -55,12 +55,18 @@ WITH_LIBPLAYER_MODULE := false
 
 OTA_UP_PART_NUM_CHANGED := true
 
-#AB_OTA_UPDATER :=true
+AB_OTA_UPDATER :=true
 
 ifeq ($(AB_OTA_UPDATER),true)
 AB_OTA_PARTITIONS := \
     boot \
     system
+
+ifneq ($(BOARD_OLD_PARTITION),true)
+AB_OTA_PARTITIONS += \
+    vendor \
+    odm
+endif
 
 TARGET_BOOTLOADER_CONTROL_BLOCK := true
 TARGET_NO_RECOVERY := true
@@ -68,6 +74,8 @@ TARGET_PARTITION_DTSI := partition_mbox_ab.dtsi
 else
 TARGET_NO_RECOVERY := false
 TARGET_PARTITION_DTSI := partition_mbox.dtsi
+BOARD_CACHEIMAGE_PARTITION_SIZE := 69206016
+BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 endif
 
 #########Support compiling out encrypted zip/aml_upgrade_package.img directly
@@ -112,18 +120,56 @@ endif
 #                                                Dm-Verity
 #
 #########################################################################
-#BUILD_WITH_DM_VERITY := true
+BUILD_WITH_DM_VERITY := true
 #TARGET_USE_SECURITY_DM_VERITY_MODE_WITH_TOOL := true
 ifeq ($(TARGET_USE_SECURITY_DM_VERITY_MODE_WITH_TOOL), true)
 BUILD_WITH_DM_VERITY := true
 endif # ifeq ($(TARGET_USE_SECURITY_DM_VERITY_MODE_WITH_TOOL), true)
+ifeq ($(BUILD_WITH_DM_VERITY), true)
+PRODUCT_PACKAGES += \
+	libfs_mgr \
+	fs_mgr \
+	slideshow
+endif
+ifneq ($(BOARD_OLD_PARTITION),true)
+ifneq ($(BOARD_USES_RECOVERY_AS_BOOT), true)
+ifeq ($(AB_OTA_UPDATER),true)
+ifeq ($(BUILD_WITH_DM_VERITY), true)
+PRODUCT_COPY_FILES += \
+    device/amlogic/p230/fstab.AB.verity.amlogic:root/fstab.amlogic
+else
+PRODUCT_COPY_FILES += \
+    device/amlogic/p230/fstab.AB.amlogic:root/fstab.amlogic
+endif
+else
 ifeq ($(BUILD_WITH_DM_VERITY), true)
 PRODUCT_COPY_FILES += \
     device/amlogic/p230/fstab.verity.amlogic:root/fstab.amlogic
 else
 PRODUCT_COPY_FILES += \
     device/amlogic/p230/fstab.amlogic:root/fstab.amlogic
-endif # ifeq ($(BUILD_WITH_DM_VERITY), true)
+endif
+endif
+else
+ifeq ($(AB_OTA_UPDATER),true)
+ifeq ($(BUILD_WITH_DM_VERITY), true)
+PRODUCT_COPY_FILES += \
+    device/amlogic/p230/fstab.AB.verity.amlogic:recovery/root/fstab.amlogic
+else
+PRODUCT_COPY_FILES += \
+    device/amlogic/p230/fstab.AB.amlogic:recovery/root/fstab.amlogic
+endif
+else
+ifeq ($(BUILD_WITH_DM_VERITY), true)
+PRODUCT_COPY_FILES += \
+    device/amlogic/p230/fstab.verity.amlogic:recovery/root/fstab.amlogic
+else
+PRODUCT_COPY_FILES += \
+    device/amlogic/p230/fstab.amlogic:recovery/root/fstab.amlogic
+endif
+endif
+endif
+endif
 
 #########################################################################
 #
@@ -289,7 +335,7 @@ endif
 #########################################################################
 ifeq ($(AB_OTA_UPDATER),true)
 PRODUCT_PACKAGES += \
-    bootctrl.default \
+    bootctrl.avb \
     bootctl
 
 PRODUCT_PACKAGES += \
@@ -297,7 +343,8 @@ PRODUCT_PACKAGES += \
     update_engine_client \
     update_verifier \
     delta_generator \
-    brillo_update_payload
+    brillo_update_payload \
+    android.hardware.boot@1.0-impl
 endif
 #########################################################################
 #

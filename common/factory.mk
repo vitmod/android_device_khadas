@@ -12,7 +12,11 @@ ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
 	BUILT_IMAGES := $(addsuffix .encrypt, $(BUILT_IMAGES))
 endif#ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
 
-BUILT_IMAGES += system.img userdata.img cache.img
+BUILT_IMAGES += system.img userdata.img
+
+ifneq ($(AB_OTA_UPDATER),true)
+BUILT_IMAGES += cache.img
+endif
 
 ifneq ($(BOARD_OLD_PARTITION),true)
 BUILT_IMAGES += vendor.img odm.img
