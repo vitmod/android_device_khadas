@@ -1,1 +1,2 @@
 allow hal_drm_default vndbinder_device:chr_file { read write open ioctl };
+allow hal_drm_default drm_device:chr_file { read open write ioctl };
