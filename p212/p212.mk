@@ -37,11 +37,7 @@ $(call inherit-product, device/amlogic/p212/device.mk)
 $(call inherit-product-if-exists, vendor/google/products/gms.mk)
 
 # p212:
-
-NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
-
 PRODUCT_PROPERTY_OVERRIDES += \
-        sys.fb.bits=32 \
         ro.hdmi.device_type=4 \
         persist.sys.hdmi.keep_awake=false
 
