@@ -44,8 +44,7 @@
 PRODUCT_PACKAGES += wpa_supplicant.conf
 
 PRODUCT_COPY_FILES += \
-	frameworks/native/data/etc/android.hardware.wifi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.xml \
-	hardware/amlogic/wifi/multi_wifi/android.hardware.wifi@1.0-service.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.wifi@1.0-service.rc
+	frameworks/native/data/etc/android.hardware.wifi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.xml
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.carrier=wifi-only
 

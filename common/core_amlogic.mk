@@ -332,6 +332,7 @@ PRODUCT_PACKAGES += \
      android.hardware.soundtrigger@2.0-impl \
      android.hardware.camera.provider@2.4-impl \
      android.hardware.thermal@1.0-impl \
+     android.hardware.wifi@1.0-service \
      android.hardware.usb@1.0-service \
      android.hardware.tv.cec@1.0-impl \
      android.hardware.health@1.0-impl
@@ -339,6 +340,8 @@ PRODUCT_PACKAGES += \
 #android.hardware.biometrics.fingerprint@2.1-service
 #android.hardware.bluetooth@1.0-impl \
 
+PRODUCT_COPY_FILES += \
+        hardware/amlogic/wifi/multi_wifi/android.hardware.wifi@1.0-service.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.wifi@1.0-service.rc
 #Audio HAL
 PRODUCT_PACKAGES += \
      android.hardware.audio@2.0-impl \
