@@ -6,3 +6,4 @@ allow hal_audio_default sysfs_digital_codec:file { write read open };
 allow hal_audio_default kernel:system { module_request };
 allow hal_audio_default media_prop:file { read open getattr };
 allow hal_audio_default shell_data_file:file { read write };
+allow hal_audio_default sysfs_xbmc:file { read open write };
