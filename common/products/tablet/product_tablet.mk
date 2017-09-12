@@ -39,10 +39,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.print.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.print.xml
 
-# Device Admin
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.software.device_admin.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.device_admin.xml
-
 #copy lowmemorykiller.txt
 ifeq ($(BUILD_WITH_LOWMEM_COMMON_CONFIG),true)
 PRODUCT_COPY_FILES += \
