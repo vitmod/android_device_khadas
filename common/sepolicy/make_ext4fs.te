@@ -3,6 +3,7 @@ type make_ext4fs_exec, exec_type, file_type;
 init_daemon_domain(make_ext4fs)
 
 allow make_ext4fs devpts:dir { search };
+allow make_ext4fs devpts:chr_file { read write getattr ioctl };
 
 allow make_ext4fs block_device:dir { search getattr };
 
@@ -10,5 +11,9 @@ allow make_ext4fs block_device:dir { search getattr };
 allow make_ext4fs vold:fd use;
 allow make_ext4fs vold:fifo_file { read write getattr };
 
+allow make_ext4fs dm_device:blk_file { ioctl open read write create getattr };
+
 allow make_ext4fs rootfs:lnk_file {getattr};
 allow make_ext4fs rootfs:file {getattr read open};
+
+allow make_ext4fs file_contexts_file:file {getattr read open};
