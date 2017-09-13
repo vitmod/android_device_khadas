@@ -398,7 +398,7 @@ PRODUCT_IS_ATV := true
 endif
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sf.disable_triple_buffer=0
+    ro.sf.disable_triple_buffer=1
 
 # ro.product.first_api_level indicates the first api level the device has commercially launched on.
 PRODUCT_PROPERTY_OVERRIDES += \
