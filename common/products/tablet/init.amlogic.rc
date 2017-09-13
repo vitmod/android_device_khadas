@@ -28,6 +28,7 @@ on init
     chmod 666 /sys/module/ionvideo/parameters/freerun_mode
     chmod 666 /sys/class/video/blackout_policy
     chmod 666 /sys/class/tsync/vpause_flag
+    write /proc/sys/vm/watermark_scale_factor 150
 
     # for zram
     mkdir /swap_zram0 0700 root root

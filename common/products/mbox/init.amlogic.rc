@@ -28,6 +28,7 @@ on init
     chmod 666 /sys/module/ionvideo/parameters/freerun_mode
     chown media system /sys/class/graphics/fb0/osd_afbcd
     write /sys/class/graphics/fb0/osd_afbcd 1
+    write /proc/sys/vm/watermark_scale_factor 150
     chmod 666 /sys/class/video/blackout_policy
     chmod 666 /sys/class/tsync/vpause_flag
     chmod 0666 /dev/amstream_sub_read
