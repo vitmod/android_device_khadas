@@ -31,5 +31,9 @@ type sysfs_audio_cap, fs_type, sysfs_type;
 type ppp_system_file, exec_type, file_type;
 type ppp_data_file, file_type;
 type log_file, file_type, data_file_type;
+
 type ntfs, sdcard_type, fs_type, mlstrustedobject;
 type exfat, sdcard_type, fs_type, mlstrustedobject;
+
+type optee_file, file_type, data_file_type;
+

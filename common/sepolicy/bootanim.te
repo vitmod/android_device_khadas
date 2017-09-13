@@ -1,2 +1,1 @@
-#Bootanim start bootvideo
-allow bootanim system_control:binder call;
+allow bootanim vendor_file:file { open read getattr execute };

@@ -1,2 +1,0 @@
-allow drm_device tmpfs:filesystem associate;
-allow drm_device tmpfs:chr_file { read write open};

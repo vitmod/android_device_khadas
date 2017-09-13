@@ -7,3 +7,5 @@ allow tee tee_data_file:dir { add_name write create ioctl remove_name open read 
 allow tee tee_data_file:file { write create open unlink link read };
 allow tee system_data_file:dir { write search add_name create };
 allow tee system_data_file:file read;
+
+allow tee vendor_file:file { read open getattr execute };

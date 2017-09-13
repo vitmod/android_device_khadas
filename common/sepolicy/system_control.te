@@ -1,12 +1,7 @@
 type system_control, domain;
-type system_control_exec, exec_type, file_type;
+type system_control_exec, exec_type, vendor_file_type, file_type;
 
-allow system_control system_control_exec:file { entrypoint read };
-
-binder_use(system_control);
-binder_call(system_control, binderservicedomain)
-binder_call(system_control, system_server)
-binder_service(system_control)
+init_daemon_domain(system_control)
 
 allow system_control vndbinder_device:chr_file { read write open ioctl };
 allow system_control vndservicemanager:binder { call transfer };
@@ -24,7 +19,7 @@ allow system_control system_control:netlink_kobject_uevent_socket { create setop
 allow system_control self:capability { net_admin };
 
 
-unix_socket_connect(system_control, vold, vold);
+#unix_socket_connect(system_control, vold, vold);
 #unix_socket_connect(system_control, property, init);
 
 # Property Service write
@@ -82,9 +77,9 @@ allow system_control graphics_device:dir r_dir_perms;
 allow system_control sysfs_audio_cap:file {open getattr read};
 allow system_control sysfs_xbmc:file rw_file_perms;
 allow system_control app_data_file:file rw_file_perms;
-allow system_control system_control_service:service_manager add;
-allow system_control permission_service:service_manager find;
-allow system_control surfaceflinger_service:service_manager find;
+#allow system_control system_control_service:service_manager add;
+#allow system_control permission_service:service_manager find;
+#allow system_control surfaceflinger_service:service_manager find;
 # Allow system_control to read /proc/pid for all processes
 r_dir_file(system_control, domain)
 r_dir_file(system_control, binderservicedomain)
@@ -99,9 +94,11 @@ allow system_control platform_app:dir { search };
 allow system_control param_tv_file:dir  { search read write open add_name remove_name rmdir };
 allow system_control param_tv_file:file { create open read write setattr getattr lock unlink };
 
-allow system_control shell_exec:file { execute_no_trans execute open read getattr };
+#allow system_control shell_exec:file { execute_no_trans execute open read getattr };
 allow system_control sysfs_digital_codec:file { read write };
-allow system_control system_file:file execute_no_trans;
+#allow system_control system_file:file execute_no_trans;
 
 allow system_control env_device:blk_file { getattr read open write };
 allow system_control self:capability sys_nice;
+
+allow system_control system_app:binder { call };

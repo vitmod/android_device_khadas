@@ -6,9 +6,6 @@ on early-init
     mount configfs configfs /sys/kernel/config
     #mount usbfs none /proc/bus/usb
 
-    insmod /boot/optee.ko
-    insmod /boot/optee_armtz.ko
-
 on init
 
 on post-fs-data
@@ -26,21 +23,8 @@ on boot
     chmod 666 /sys/class/sii9233a/enable
     chmod 666 /sys/module/tvin_vdin/parameters/max_buf_num
 
-    #chmod 0666 /dev/amstream_sub_read
-
-#    insmod  /vendor/lib/audio_data.ko
-
     # chmod 0666 /dev/ge2d
     chmod 666 /dev/cec
     chmod 0666 /dev/opteearmtz00
     chmod 0666 /dev/tee0
-
-on fs
-on post-fs-data
-   mkdir  /data/tee
-
-service tee_supplicant /system/bin/tee-supplicant
-		class main
-		oneshot
-		seclabel u:r:tee:s0
 

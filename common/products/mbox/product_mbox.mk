@@ -35,13 +35,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     camera.amlogic
 
-# HDMITX CEC HAL
-PRODUCT_PACKAGES += \
-    hdmi_cec \
-    libhdmicec \
-    libhdmicec_jni \
-    hdmi_cec.amlogic
-
 PRODUCT_PROPERTY_OVERRIDES += ro.hdmi.device_type=4
 
 #Tvsettings

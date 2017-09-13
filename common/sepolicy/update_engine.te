@@ -2,4 +2,4 @@
 allow update_engine misc_block_device:blk_file rw_file_perms;
 allow update_engine vendor_block_device:blk_file rw_file_perms;
 allow update_engine odm_block_device:blk_file rw_file_perms;
-allow update_engine system_app:binder {call};
+allow update_engine system_app:binder { call };

@@ -1,1 +1,1 @@
-allow webview_zygote kernel:system module_request;
+allow webview_zygote mnt_expand_file:dir { getattr };

@@ -46,14 +46,9 @@ on fs
     setprop ro.crypto.fuse_sdcard true
     swapon_all /fstab.amlogic
 
-on post-fs
-    restorecon_recursive /tee
-    start tee_supplicant
-
 on post-fs-data
     mkdir /data/misc/wifi 0770 wifi wifi
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
-    mkdir /data/misc/dhcp 0770 system dhcp
 
     mkdir /data/misc/etc 0777 system pppoe
     mkdir /data/misc/etc/ppp 0777 system pppoe
@@ -319,14 +314,6 @@ on boot
     chmod 664 /sys/devices/system/cpu/cpu1/online
 
     chown system system /sys/devices/system/clocksource/clocksource0/current_clocksource
-    # usbpm
-    chown system system /sys/devices/dwc2_a/peri_power
-    chown system system /sys/devices/dwc2_a/peri_sleepm
-    chown system system /sys/devices/dwc2_a/peri_otg_disable
-    chown system system /sys/devices/dwc2_b/peri_sleepm
-    chown system system /sys/devices/dwc2_b/peri_otg_disable
-    chown system system /sys/class/aml_mod/mod_off
-    chown system system /sys/class/aml_mod/mod_on
 
     # hdcp2
     write /sys/class/unifykeys/attach 1
@@ -358,8 +345,6 @@ on boot
     chown root system /sys/module/di/parameters/det3d_en
     chown root system /sys/module/di/parameters/prog_proc_config
 
-#   start sdcard
-
     write /sys/class/vfm/map "rm default"
     write /sys/class/vfm/map "add default decoder ppmgr deinterlace amvideo"
 
@@ -369,11 +354,6 @@ on aml-firstboot-init
     confirm_formated ext4 /dev/block/data /data
     wait /dev/block/cache 20
     confirm_formated ext4 /dev/block/cache /cache
-
-service hdmi_cec /vendor/bin/hdmi_cec
-    class core
-    user root
-    group system
 
 # virtual sdcard daemon running as media_rw (1023)
 #service sdcard /system/bin/sdcard -u 1023 -g 1023 /data/media /mnt/shell/emulated
@@ -406,37 +386,6 @@ service watchdogd /sbin/watchdogd 10 20
     seclabel u:r:watchdogd:s0
 
 
-
-service dhcpcd_eth0 /system/bin/dhcpcd -ABKLG
-    class main
-    disabled
-    oneshot
-
-service dhcpcd_usbnet0 /system/bin/dhcpcd -ABKLG
-    class main
-    disabled
-    oneshot
-
-service dhcpcd_wlan0 /system/bin/dhcpcd -ABKL
-    class main
-    disabled
-    oneshot
-
-service dhcpcd_p2p /system/bin/dhcpcd -aABKL
-    class main
-    disabled
-    oneshot
-
-service iprenew_wlan0 /system/bin/dhcpcd -n
-    class main
-    disabled
-    oneshot
-
-service iprenew_p2p /system/bin/dhcpcd -n
-    class main
-    disabled
-    oneshot
-
 # on userdebug and eng builds, enable kgdb on the serial console
 on property:ro.debuggable=1
     write /sys/module/kgdboc/parameters/kgdboc ttyFIQ2
@@ -447,25 +396,6 @@ service remotecfg /vendor/bin/remotecfg /vendor/etc/remote.conf
     oneshot
     seclabel u:r:remotecfg:s0
 
-service pppoe_wrapper /vendor/bin/pppoe_wrapper
-    class main
-    group system inet
-    oneshot
-    seclabel u:r:pppoe_wrapper:s0
-
-service usbpm /vendor/bin/usbtestpm
-    class main
-    user system
-    group system
-    seclabel u:r:usbpm:s0
-    disabled
-
-service imageserver /vendor/bin/imageserver
-    class main
-    user root
-    group system
-    seclabel u:r:imageserver:s0
-
 service bootvideo /vendor/bin/bootplayer /vendor/etc/bootvideo
     class main
     user root
@@ -473,14 +403,8 @@ service bootvideo /vendor/bin/bootplayer /vendor/etc/bootvideo
     disabled
     oneshot
 
-on property:dev.bootcomplete=1
-    start usbpm
-
-on property:vold.post_fs_data_done=1
-    start tee_supplicant
-
 service hdcp_tx22 /vendor/bin/hdcp_tx22 \
-    -f /system/etc/firmware/firmware.le
+    -f /vendor/etc/firmware/firmware.le
     class main
     disabled
     oneshot

@@ -43,10 +43,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     remotecfg
 
-# HDMITX CEC HAL
-PRODUCT_PACKAGES += \
-    hdmi_cec.amlogic
-
 USE_CUSTOM_AUDIO_POLICY := 1
 
 ifneq ($(TARGET_BUILD_GOOGLE_ATV), true)
@@ -66,13 +62,6 @@ PRODUCT_PACKAGES += \
 # Camera Hal
 PRODUCT_PACKAGES += \
     camera.amlogic
-
-# HDMITX CEC HAL
-PRODUCT_PACKAGES += \
-    hdmi_cec \
-    libhdmicec \
-    libhdmicec_jni \
-    hdmi_cec.amlogic
 
 PRODUCT_PROPERTY_OVERRIDES += ro.hdmi.device_type=0
 

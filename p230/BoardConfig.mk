@@ -109,3 +109,8 @@ include device/amlogic/common/gpu/mali450-user-$(TARGET_ARCH).mk
 #MALLOC_IMPL := dlmalloc
 
 WITH_DEXPREOPT := true
+PRODUCT_FULL_TREBLE_OVERRIDE := true
+BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
+
+DEVICE_MANIFEST_FILE := device/amlogic/p230/manifest.xml
+#DEVICE_MATRIX_FILE   := device/amlogic/common/compatibility_matrix.xml

@@ -44,7 +44,7 @@ PRODUCT_COPY_FILES += \
     device/amlogic/p212/files/audio_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy.conf \
     device/amlogic/p212/files/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
     device/amlogic/p212/files/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml \
-    device/amlogic/p212/files/mixer_paths.xml:system/etc/mixer_paths.xml \
+    device/amlogic/p212/files/mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths.xml \
     device/amlogic/p212/files/mesondisplay.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/mesondisplay.cfg \
     device/amlogic/p212/manifest.xml:$(TARGET_COPY_OUT_VENDOR)/manifest.xml
 

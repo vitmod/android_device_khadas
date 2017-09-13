@@ -1,7 +1,6 @@
-allow audioserver sysfs_digital_codec:file { open read write getattr };
-allow audioserver sysfs_audio_samesource:file { open read write getattr };
-allow audioserver sysfs_audio_cap:file { open read write getattr };
-allow audioserver sysfs_xbmc:file { open read write getattr };
+allow audioserver { sysfs_xbmc sysfs_digital_codec sysfs_audio_samesource sysfs_audio_cap }:file { open read write getattr };
+
+allow audioserver vendor_file:file { read open getattr execute };
 
 allow audioserver kernel:system module_request;
 

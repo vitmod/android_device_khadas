@@ -1,1 +1,0 @@
-allow cameraserver kernel:system module_request;

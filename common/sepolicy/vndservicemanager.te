@@ -1,3 +1,0 @@
-allow vndservicemanager system_control:dir { search };
-allow vndservicemanager system_control:file { open read getattr };
-allow vndservicemanager system_control:process { getattr };

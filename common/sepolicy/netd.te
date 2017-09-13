@@ -3,5 +3,8 @@ allow netd self:capability sys_module;
 
 allow netd servicemanager:binder call;
 
+allow netd proc_net:dir { write add_name };
+allow netd proc_net:file { create };
+
 allow netd rootfs:lnk_file { getattr };
 allow netd self:capability sys_nice;

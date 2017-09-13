@@ -4,9 +4,6 @@
 # specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
 
 /dev/block/misc       /misc               emmc      defaults      defaults
-/dev/block/system     /system             ext4      ro       wait,verify
-/dev/block/vendor     /vendor             ext4      ro       wait,verify
-/dev/block/odm        /odm                ext4      ro       wait
 /dev/block/data       /data               ext4      noatime,nosuid,nodev,nodelalloc,nomblk_io_submit,errors=panic    wait,check,encryptable=footer,quota
 /dev/block/cache      /cache              ext4      noatime,nosuid,nodev,nodelalloc,nomblk_io_submit,errors=panic    wait,check
 /devices/*.sd/mmc_host/sd*  auto                vfat      defaults                       voldmanaged=sdcard1:auto,noemulatedsd

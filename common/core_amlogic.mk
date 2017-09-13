@@ -170,7 +170,7 @@ PRODUCT_PACKAGES += \
     systemcontrol \
     systemcontrol_static \
     libsystemcontrolservice \
-    vendor.amlogic.hardware.systemcontrol@1.0
+    vendor.amlogic.hardware.systemcontrol@1.0_vendor
 
 PRODUCT_PACKAGES += \
     OTAUpgrade \
@@ -201,6 +201,7 @@ PRODUCT_PACKAGES += \
     ntfs-3g \
     ntfsfix \
     mkntfs \
+    libxml2 \
     gralloc.amlogic \
     power.amlogic \
     hwcomposer.amlogic \
@@ -335,20 +336,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
 #
 #########################################################################
 PRODUCT_PACKAGES += \
-     android.hardware.light@2.0-impl \
-     android.hardware.drm@1.0-impl \
      android.hardware.soundtrigger@2.0-impl \
-     android.hardware.thermal@1.0-impl \
      android.hardware.wifi@1.0-service \
-     android.hardware.usb@1.0-service \
-     android.hardware.tv.cec@1.0-impl \
-     android.hardware.health@1.0-impl
+     android.hardware.usb@1.0-service
 
-#android.hardware.biometrics.fingerprint@2.1-service
-#android.hardware.bluetooth@1.0-impl \
-
+#workround because android.hardware.wifi@1.0-service has not permission to insmod ko
 PRODUCT_COPY_FILES += \
         hardware/amlogic/wifi/multi_wifi/android.hardware.wifi@1.0-service.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.wifi@1.0-service.rc
+
 #Audio HAL
 PRODUCT_PACKAGES += \
      android.hardware.audio@2.0-impl \
@@ -403,6 +398,31 @@ PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl \
     android.hardware.drm@1.0-service
 
+# HDMITX CEC HAL
+PRODUCT_PACKAGES += \
+    android.hardware.tv.cec@1.0-impl \
+    android.hardware.tv.cec@1.0-service \
+    hdmicecd \
+    libhdmicec \
+    libhdmicec_jni \
+    vendor.amlogic.hardware.hdmicec@1.0_vendor \
+    hdmi_cec.amlogic
+
+#light hal
+PRODUCT_PACKAGES += \
+    android.hardware.light@2.0-impl \
+    android.hardware.light@2.0-service
+
+#thermal hal
+PRODUCT_PACKAGES += \
+    android.hardware.thermal@1.0-impl \
+    android.hardware.thermal@1.0-service
+
+#health hal
+PRODUCT_PACKAGES += \
+    android.hardware.health@1.0-impl \
+    android.hardware.health@1.0-service
+
 ifeq ($(TARGET_BUILD_GOOGLE_ATV), true)
 PRODUCT_IS_ATV := true
 endif
@@ -416,10 +436,36 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # VNDK version is specified
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.vndk.version=26
+    ro.vendor.vndk.version=26.1.0
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.treble.enabled=true
 
 PRODUCT_PACKAGES += \
-    libxml2
+    android.hardware.graphics.allocator@2.0.vndk-sp\
+    android.hardware.graphics.mapper@2.0.vndk-sp\
+    android.hardware.graphics.common@1.0.vndk-sp\
+    android.hardware.renderscript@1.0.vndk-sp\
+    android.hidl.base@1.0.vndk-sp\
+    android.hidl.memory@1.0.vndk-sp \
+    libRSCpuRef.vndk-sp\
+    libRSDriver.vndk-sp\
+    libRS_internal.vndk-sp\
+    libbacktrace.vndk-sp\
+    libbase.vndk-sp\
+    libbcinfo.vndk-sp\
+    libblas.vndk-sp\
+    libc++.vndk-sp\
+    libcompiler_rt.vndk-sp\
+    libcutils.vndk-sp\
+    libft2.vndk-sp\
+    libhardware.vndk-sp\
+    libhidlbase.vndk-sp\
+    libhidlmemory.vndk-sp \
+    libhidltransport.vndk-sp\
+    libhwbinder.vndk-sp\
+    libion.vndk-sp\
+    liblzma.vndk-sp\
+    libpng.vndk-sp\
+    libunwind.vndk-sp\
+    libutils.vndk-sp

@@ -1,1 +1,2 @@
 vendor.amlogic.hardware.systemcontrol::ISystemControl              u:object_r:systemcontrol_hwservice:s0
+vendor.amlogic.hardware.hdmicec::IDroidHdmiCEC                     u:object_r:hdmicecd_hwservice:s0
