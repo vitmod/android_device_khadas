@@ -7,7 +7,7 @@
 /dev/block/system     /system             ext4      ro       wait,slotselect
 /dev/block/vendor     /vendor             ext4      ro       wait,slotselect
 /dev/block/odm        /odm                ext4      ro       wait,slotselect
-/dev/block/data       /data               ext4      noatime,nosuid,nodev,nodelalloc,nomblk_io_submit,errors=panic    wait,check,encryptable=footer
+/dev/block/data       /data               ext4      noatime,nosuid,nodev,nodelalloc,nomblk_io_submit,errors=panic    wait,check,encryptable=footer,quota
 /devices/*.sd/mmc_host/sd*  auto                vfat      defaults                       voldmanaged=sdcard1:auto,noemulatedsd
 /devices/*dwc3/xhci-hcd.0.auto/usb?/*/host*/target*/block/sd*  auto             vfat      defaults                       voldmanaged=udisk0:auto
 /devices/*dwc3/xhci-hcd.0.auto/usb?/*/host*/target*/block/sd*  auto             vfat      defaults                       voldmanaged=udisk1:auto
