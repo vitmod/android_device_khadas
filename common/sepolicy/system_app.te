@@ -48,3 +48,6 @@ allow system_app update_engine:binder {call transfer};
 
 allow system_app tv_prop:file {open read getattr};
 allow system_app tv_prop:property_service {set};
+
+allow system_app proc_stat:file { read open getattr };
+allow system_app proc_interrupts:file { read open getattr };
