@@ -63,7 +63,9 @@ $(KERNEL_CONFIG): $(KERNEL_OUT)
 
 BOARD_MKBOOTIMG_ARGS := --second $(PRODUCT_OUT)/dtb.img
 
+ifneq ($(USE_USB_AS_HOST),true)
 BOARD_MKBOOTIMG_ARGS += --cmdline "otg_device=1"
+endif
 
 $(INTERMEDIATES_KERNEL): $(KERNEL_OUT) $(KERNEL_CONFIG) $(INSTALLED_BOARDDTB_TARGET)
 	@echo "make Image"
