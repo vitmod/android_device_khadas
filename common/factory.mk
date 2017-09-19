@@ -50,7 +50,6 @@ ifeq ($(AB_OTA_UPDATER),true)
 			$(MAKE) -C $(KERNEL_ROOTDIR) O=../$(KERNEL_OUT) ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) $(strip $(aDts)).dtd; \
 		fi;\
 		$(MAKE) -C $(KERNEL_ROOTDIR) O=../$(KERNEL_OUT) ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) $(strip $(aDts)).dtb; \
-		cd $(KERNEL_ROOTDIR); git checkout -- $(KERNEL_DEVICETREE_DIR)/$(strip $(aDts)).dts; cd ../; \
 	)
 else
 	$(foreach aDts, $(KERNEL_DEVICETREE), \
