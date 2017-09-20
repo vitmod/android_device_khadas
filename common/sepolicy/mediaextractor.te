@@ -1,1 +1,3 @@
 get_prop(mediaextractor, media_prop)
+
+allow mediaextractor unlabeled:file { read getattr };

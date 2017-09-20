@@ -51,3 +51,6 @@ allow system_app tv_prop:property_service {set};
 
 allow system_app proc_stat:file { read open getattr };
 allow system_app proc_interrupts:file { read open getattr };
+
+allow system_app unlabeled:dir {open};
+allow system_app system_app:netlink_kobject_uevent_socket {read};
