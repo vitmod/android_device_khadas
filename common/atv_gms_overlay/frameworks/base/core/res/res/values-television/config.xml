@@ -22,6 +22,6 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <!-- Flags enabling default window features. See Window.java -->
-    <bool name="config_defaultWindowFeatureOptionsPanel">true</bool>
+    <bool name="config_defaultWindowFeatureOptionsPanel">false</bool>
     <integer name="config_longPressOnHomeBehavior">1</integer>
 </resources>
