@@ -19,7 +19,7 @@ allow system_app pppoe_service:service_manager add;
 allow system_app dig_socket:sock_file write;
 
 allow system_app iso9660:dir { search read open };
-allow system_app unlabeled:dir { search read write getattr };
+allow system_app unlabeled:dir { open search read write getattr };
 allow system_app unlabeled:file { lock open read write getattr };
 
 # /cache_file for dvb app creat update.zip file at /cache  dir
@@ -52,5 +52,8 @@ allow system_app tv_prop:property_service {set};
 allow system_app proc_stat:file { read open getattr };
 allow system_app proc_interrupts:file { read open getattr };
 
-allow system_app unlabeled:dir {open};
-allow system_app system_app:netlink_kobject_uevent_socket {read};
+allow system_app exfat:dir create_dir_perms;
+allow system_app exfat:file create_file_perms;
+
+allow system_app ntfs:dir create_dir_perms;
+allow system_app ntfs:file create_file_perms;

@@ -23,7 +23,7 @@ allow mediaserver audio_device:dir r_dir_perms;
 allow mediaserver sysfs_audio_cap:file {open read write};
 allow mediaserver kernel:system module_request;
 
-allow mediaserver unlabeled:file { getattr read };
-
+allow mediaserver exfat:file { getattr read };
+allow mediaserver ntfs:file { getattr read };
 
 get_prop(mediaserver, media_prop)

@@ -37,6 +37,3 @@ allow vold apk_data_file:dir { getattr open read };
 
 #for hw keymaster
 allow vold drm_device:chr_file  {open read write ioctl};
-
-#for exfat, temporary way
-allow vold unlabeled:filesystem { mount unmount };
