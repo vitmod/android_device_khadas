@@ -131,6 +131,7 @@ endif
 
 ifeq ($(TARGET_USE_OPTEEOS), true)
     BOARD_OMX_WITH_OPTEE_TVP := true
+    BUILD_WITH_TEEVIDEOFIRM_LOAD :=true
 else
 ifeq ($(TARGET_USE_SECUREOS), true)
     BOARD_OMX_WITH_TVP := true
@@ -222,7 +223,15 @@ PRODUCT_PACKAGES += bootplayer \
     alsalib-cardsaliasesconf
 
 endif
+ifeq ($(BUILD_WITH_TEEVIDEOFIRM_LOAD),true)
+PRODUCT_PACKAGES += \
+    libtee_load_video_fw \
+    tee_preload_fw \
+    526fc4fc-7ee6-4a12-96e3-83da9565bce8
 
+PRODUCT_COPY_FILES += \
+	vendor/amlogic/prebuilt/videofirm/tee_preload_fw:/vendor/bin/tee_preload_fw
+endif
 #BOARD_SECCOMP_POLICY := device/amlogic/common/seccomp
 PRODUCT_COPY_FILES += \
     device/amlogic/common/seccomp/mediaextractor.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediaextractor.policy \
