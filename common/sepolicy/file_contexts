@@ -118,6 +118,7 @@
 /vendor/bin/remotecfg       u:object_r:remotecfg_exec:s0
 /vendor/bin/systemcontrol   u:object_r:system_control_exec:s0
 /system/bin/tee-supplicant	u:object_r:tee_exec:s0
+/vendor/bin/tee_preload_fw  u:object_r:firmload_exec:s0
 /vendor/bin/tvserver    		u:object_r:tvserver_exec:s0
 /vendor/bin/usbtestpm       u:object_r:usbpm_exec:s0
 /vendor/bin/wlan_fwloader   u:object_r:wlan_fwloader_exec:s0

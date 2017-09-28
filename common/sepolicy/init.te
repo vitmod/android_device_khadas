@@ -55,6 +55,7 @@ allow init drm_device:chr_file {setattr read write open ioctl};
 allow init tee_block_device:blk_file rw_file_perms;
 allow init odm_block_device:blk_file rw_file_perms;
 allow shell drm_device:chr_file rw_file_perms;
+allow init firmload_exec:file {getattr};
 
 recovery_only(`
   domain_trans(init, rootfs, shell)
