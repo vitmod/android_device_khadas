@@ -332,7 +332,7 @@ endif
 #########################################################################
 ifeq ($(AB_OTA_UPDATER),true)
 PRODUCT_PACKAGES += \
-    bootctrl.avb \
+    bootctrl.amlogic \
     bootctl
 
 PRODUCT_PACKAGES += \
@@ -341,7 +341,8 @@ PRODUCT_PACKAGES += \
     update_verifier \
     delta_generator \
     brillo_update_payload \
-    android.hardware.boot@1.0-impl
+    android.hardware.boot@1.0-impl \
+    android.hardware.boot@1.0-service
 endif
 #########################################################################
 #
