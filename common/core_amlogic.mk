@@ -330,7 +330,6 @@ PRODUCT_PACKAGES += \
      android.hardware.light@2.0-impl \
      android.hardware.drm@1.0-impl \
      android.hardware.soundtrigger@2.0-impl \
-     android.hardware.camera.provider@2.4-impl \
      android.hardware.thermal@1.0-impl \
      android.hardware.wifi@1.0-service \
      android.hardware.usb@1.0-service \
@@ -348,8 +347,11 @@ PRODUCT_PACKAGES += \
      android.hardware.audio.effect@2.0-impl \
      android.hardware.audio@2.0-service
 #Camera HAL
+ifneq ($(TARGET_BUILD_GOOGLE_ATV), true)
 PRODUCT_PACKAGES += \
+     android.hardware.camera.provider@2.4-impl \
      android.hardware.camera.provider@2.4-service
+endif
 
 #Power HAL
 PRODUCT_PACKAGES += \
