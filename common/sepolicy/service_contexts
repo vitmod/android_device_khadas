@@ -7,3 +7,4 @@ tvservice                                   u:object_r:tvserver_service:s0
 media.screenmediasource                     u:object_r:screenmediasource_service:s0
 tee_supplicant                              u:object_r:tee_service:s0
 tv_remote                                   u:object_r:tv_remote_service:s0
+droidmount                                  u:object_r:mount_service:s0
