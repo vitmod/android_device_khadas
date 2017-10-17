@@ -8,6 +8,15 @@ $(call inherit-product-if-exists, external/svox/pico/lang/all_pico_languages.mk)
 # Get a list of languages.
 $(call inherit-product, build/target/product/locales_full.mk)
 
+# Define the host tools and libs that are parts of the SDK.
+ifneq ($(filter sdk win_sdk sdk_addon,$(MAKECMDGOALS)),)
+-include sdk/build/product_sdk.mk
+-include development/build/product_sdk.mk
+
+PRODUCT_PACKAGES += \
+    EmulatorSmokeTests
+endif
+
 # Additional settings used in all AOSP builds
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.com.android.dateformat=MM-dd-yyyy \
