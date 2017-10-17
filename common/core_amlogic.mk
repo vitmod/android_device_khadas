@@ -84,9 +84,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
         device/amlogic/common/ddr/ddr_window_64.ko:$(PRODUCT_OUT)/obj/lib_vendor/ddr_window_64.ko
 
-PRODUCT_COPY_FILES += \
-        device/amlogic/common/manifest.xml:$(TARGET_COPY_OUT_VENDOR)/manifest.xml
-
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.carrier=unknown \
     net.tethering.noprovisioning=true

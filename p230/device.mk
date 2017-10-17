@@ -33,7 +33,8 @@ PRODUCT_COPY_FILES += \
     device/amlogic/p230/files/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml \
     device/amlogic/p230/files/mixer_paths.xml:system/etc/mixer_paths.xml \
     device/amlogic/p230/files/mesondisplay.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/mesondisplay.cfg \
-    frameworks/native/data/etc/android.hardware.hdmi.cec.xml:system/etc/permissions/android.hardware.hdmi.cec.xml
+    frameworks/native/data/etc/android.hardware.hdmi.cec.xml:system/etc/permissions/android.hardware.hdmi.cec.xml \
+    device/amlogic/p230/manifest.xml:$(TARGET_COPY_OUT_VENDOR)/manifest.xml
 
 # remote IME config file
 PRODUCT_COPY_FILES += \
