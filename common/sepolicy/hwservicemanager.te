@@ -7,3 +7,8 @@ allow hwservicemanager hdmicecd:binder { call transfer };
 allow hwservicemanager hdmicecd:dir { search };
 allow hwservicemanager hdmicecd:file { read open };
 allow hwservicemanager hdmicecd:process { getattr };
+
+allow hwservicemanager droidvold:binder { call transfer };
+allow hwservicemanager droidvold:dir { search };
+allow hwservicemanager droidvold:file { read open };
+allow hwservicemanager droidvold:process { getattr };

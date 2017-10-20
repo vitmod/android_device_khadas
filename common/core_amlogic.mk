@@ -423,6 +423,12 @@ PRODUCT_PACKAGES += \
     android.hardware.health@1.0-impl \
     android.hardware.health@1.0-service
 
+# DroidVold
+PRODUCT_PACKAGES += \
+    vendor.amlogic.hardware.droidvold@10 \
+    vendor.amlogic.hardware.droidvold@10_vendor \
+    vendor.amlogic.hardware.droidvold-V1.0-java
+
 ifeq ($(TARGET_BUILD_GOOGLE_ATV), true)
 PRODUCT_IS_ATV := true
 endif

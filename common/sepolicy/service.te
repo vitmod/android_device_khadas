@@ -7,3 +7,4 @@ type pppoe_service,             service_manager_type;
 type screenmediasource_service, service_manager_type;
 type tee_service,               service_manager_type;
 type tv_remote_service,system_server_service,         service_manager_type;
+type droidmount_service,        service_manager_type;
