@@ -181,8 +181,8 @@ endif
 #
 #########################################################################
 
-#MULTI_WIFI_SUPPORT := true
-WIFI_MODULE := AP6335
+MULTI_WIFI_SUPPORT := true
+#WIFI_MODULE := AP6335
 include device/amlogic/common/wifi.mk
 
 # Change this to match target country

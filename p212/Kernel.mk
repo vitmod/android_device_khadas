@@ -3,7 +3,7 @@
 -include device/amlogic/common/media_modules.mk
 
 USE_PREBUILT_KERNEL := false
-WIFI_MODULE := AP6335
+WIFI_MODULE := multiwifi
 
 INSTALLED_KERNEL_TARGET := $(PRODUCT_OUT)/kernel
 
