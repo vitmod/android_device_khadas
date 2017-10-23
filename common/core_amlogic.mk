@@ -178,7 +178,8 @@ PRODUCT_PACKAGES += \
     SubTitle    \
     libdig \
     ReadLog \
-    BluetoothRemote
+    BluetoothRemote \
+    Happycast_Tv
 
 PRODUCT_PACKAGES += \
     hostapd \
