@@ -1,6 +1,7 @@
 #if use probuilt kernel or build kernel from source code
 -include device/amlogic/common/gpu.mk
 -include device/amlogic/common/media_modules.mk
+-include device/amlogic/common/wifi_modules.mk
 
 USE_PREBUILT_KERNEL := false
 WIFI_MODULE := multiwifi
@@ -33,10 +34,10 @@ TARGET_AMLOGIC_INT_RECOVERY_KERNEL := $(KERNEL_OUT)/arch/$(KERNEL_ARCH)/boot/Ima
 
 BOARD_VENDOR_KERNEL_MODULES := \
 	$(PRODUCT_OUT)/obj/lib_vendor/audio_data.ko \
-	$(PRODUCT_OUT)/obj/lib_vendor/dhd.ko \
 	$(PRODUCT_OUT)/obj/lib_vendor/ddr_window_64.ko
 
 BOARD_VENDOR_KERNEL_MODULES	+= $(DEFAULT_MEDIA_KERNEL_MODULES)
+BOARD_VENDOR_KERNEL_MODULES     += $(DEFAULT_WIFI_KERNEL_MODULES)
 
 WIFI_OUT  := $(TARGET_OUT_INTERMEDIATES)/hardware/wifi
 
