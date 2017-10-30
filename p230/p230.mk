@@ -174,7 +174,8 @@ endif
 #
 #########################################################################
 
-WIFI_MODULE := bcm4356
+#WIFI_MODULE := bcm4356
+MULTI_WIFI_SUPPORT := true
 include device/amlogic/common/wifi.mk
 
 # Change this to match target country
