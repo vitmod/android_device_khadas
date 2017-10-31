@@ -28,6 +28,7 @@ on init
     chmod 666 /sys/module/ionvideo/parameters/freerun_mode
     chown media system /sys/class/graphics/fb0/osd_afbcd
     write /sys/class/graphics/fb0/osd_afbcd 1
+    write /proc/sys/vm/watermark_scale_factor 150
     chmod 666 /sys/class/video/blackout_policy
     chmod 666 /sys/class/tsync/vpause_flag
     chmod 0666 /dev/amstream_sub_read
@@ -347,6 +348,9 @@ on boot
     chmod 664 /sys/class/mpgpu/scale_mode
     chown system system /sys/class/mpgpu/mpgpucmd
     chmod 664 /sys/class/mpgpu/mpgpucmd
+    #power
+    chmod 664 /sys/power/early_suspend_trigger
+    chown root system /sys/power/early_suspend_trigger
 
     #di detect 3D
     chmod 664 /sys/module/di/parameters/det3d_en
@@ -363,11 +367,6 @@ on aml-firstboot-init
     #format data patrition if not exist
     wait /dev/block/data 20
     confirm_formated ext4 /dev/block/data /data
-
-service system_control /vendor/bin/systemcontrol
-    class core
-    user root
-    group system
 
 service hdmi_cec /vendor/bin/hdmi_cec
     class core
