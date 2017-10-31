@@ -50,7 +50,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PACKAGES += \
     wificond \
-    wifilogd
+    wifilogd \
+    libwifi-hal-common-ext
 
 ################################################################################## bcm4354
 ifeq ($(WIFI_MODULE),bcm4354)
