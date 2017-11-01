@@ -70,7 +70,13 @@ TARGET_NO_RECOVERY := true
 TARGET_PARTITION_DTSI := partition_mbox_ab.dtsi
 else
 TARGET_NO_RECOVERY := false
-TARGET_PARTITION_DTSI := partition_mbox.dtsi
+
+ifneq ($(BOARD_OLD_PARTITION),true)
+TARGET_PARTITION_DTSI := partition_mbox_normal.dtsi
+else
+TARGET_PARTITION_DTSI := partition_mbox_old.dtsi
+endif
+
 BOARD_CACHEIMAGE_PARTITION_SIZE := 69206016
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 endif
