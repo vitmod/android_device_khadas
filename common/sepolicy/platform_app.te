@@ -34,3 +34,7 @@ allow platform_app exfat:file create_file_perms;
 allow platform_app ntfs:dir create_dir_perms;
 allow platform_app ntfs:file create_file_perms;
 
+allow platform_app systemcontrol_hwservice:hwservice_manager { find };
+allow platform_app system_control:binder { call };
+allow platform_app droidmount_service:service_manager { find };
+allow platform_app subtitle_service:service_manager { find };
