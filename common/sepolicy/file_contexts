@@ -78,7 +78,7 @@
 /dev/tvafe0             		u:object_r:video_device:s0
 /dev/vdin0              		u:object_r:video_device:s0
 /dev/wifi_power     			u:object_r:radio_device:s0
-
+/dev/hidraw[0-3]				u:object_r:hidraw_device:s0
 
 /sys/devices/platform/bt-dev/rfkill/rfkill0/state	        u:object_r:sysfs_bluetooth_writable:s0
 /sys/devices/platform/bt-dev/rfkill/rfkill0/type	        u:object_r:sysfs_bluetooth_writable:s0

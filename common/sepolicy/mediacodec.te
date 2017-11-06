@@ -11,3 +11,5 @@ allow mediacodec mediaserver:file { read open };
 allow mediacodec dvb_video_device:chr_file rw_file_perms;
 
 allow mediacodec system_file:dir { read open };
+allow mediacodec system_server:fifo_file { write append };
+
