@@ -101,7 +101,7 @@ on boot
     chown media system /sys/class/tsync/av_threshold_min
     chown media system /sys/class/tsync/av_threshold_max
     chown system system /sys/class/graphics/fb0/blank
-    chown media system /sys/class/graphics/fb0/free_scale_switch
+    chown system graphics /sys/class/graphics/fb0/free_scale_switch
     chown media system /sys/class/graphics/fb1/blank
     chown media system /sys/class/graphics/fb0/order
     chown media system /sys/class/graphics/fb1/order
@@ -109,10 +109,12 @@ on boot
     chown media system /sys/class/graphics/fb0/enable_key_onhold
     chown media system /sys/module/amlvideodri/parameters/freerun_mode
     chown media system /sys/module/ionvideo/parameters/freerun_mode
+    chown system graphics /sys/module/fb/parameters/osd_logo_index
 
     chmod 0664 /sys/class/graphics/fb0/blank
     chmod 0664 /sys/class/graphics/fb1/blank
     chmod 0664 /sys/class/graphics/fb0/free_scale_switch
+    chmod 0660 /sys/module/fb/parameters/osd_logo_index
 
     chown media system /sys/class/video/blackout_policy
     chown media system /sys/class/video/screen_mode
