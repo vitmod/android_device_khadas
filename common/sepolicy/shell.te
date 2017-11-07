@@ -1,6 +1,5 @@
-allow shell rootfs:file { entrypoint };
+allow shell rootfs:file { entrypoint execute read getattr };
 allow shell sysfs:file { read open getattr };
-
 
 allow shell hdcptx_device:chr_file { open read write getattr ioctl };
 

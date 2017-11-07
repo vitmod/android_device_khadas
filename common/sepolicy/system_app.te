@@ -40,8 +40,9 @@
 #allow system_app pppoe_wrapper_socket:sock_file create;
 #allow system_app pppoe_wrapper_socket:sock_file unlink;
 #allow system_app pppoe_wrapper_socket:file create;
-#allow system_app cache_recovery_file:dir { search read open write add_name remove_name};
-#allow system_app cache_recovery_file:file { create rw_file_perms unlink};
+
+allow system_app cache_recovery_file:dir { search read open write add_name remove_name };
+allow system_app cache_recovery_file:file { create getattr open read write };
 
 #allow system_app update_engine:binder {call transfer};
 #
