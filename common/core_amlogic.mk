@@ -475,3 +475,7 @@ PRODUCT_PACKAGES += \
     libpng.vndk-sp\
     libunwind.vndk-sp\
     libutils.vndk-sp
+ifeq ($(TARGET_BUILD_GOOGLE_ATV),true)
+   PRODUCT_COPY_FILES += \
+          $(LOCAL_PATH)/tutorial-library-google.zip:system/media/tutorial-library-google.zip
+endif
