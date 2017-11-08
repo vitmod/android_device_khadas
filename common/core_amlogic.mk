@@ -45,7 +45,8 @@ PRODUCT_PACKAGES += \
 
 ifneq ($(TARGET_BUILD_GOOGLE_ATV), true)
 PRODUCT_PACKAGES += \
-    PhotoTable
+    PhotoTable \
+    Happycast_Tv
 endif
 
 ifneq ($(TARGET_BUILD_GOOGLE_ATV), true)
@@ -178,8 +179,7 @@ PRODUCT_PACKAGES += \
     SubTitle    \
     libdig \
     ReadLog \
-    BluetoothRemote \
-    Happycast_Tv
+    BluetoothRemote
 
 PRODUCT_PACKAGES += \
     hostapd \
