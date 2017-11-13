@@ -21,7 +21,7 @@ allow droidvold block_device:dir { create read write search add_name };
 
 allow droidvold fuseblk:filesystem { mount unmount };
 
-allow droidvold self:capability { net_admin dac_override sys_admin sys_rawio chown fowner fsetid };
+allow droidvold self:capability { net_admin dac_override sys_admin chown fowner fsetid };
 
 allow droidvold tmpfs:dir create_dir_perms;
 allow droidvold tmpfs:dir mounton;
