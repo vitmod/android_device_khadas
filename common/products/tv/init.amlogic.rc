@@ -260,7 +260,7 @@ on boot
 
     # HDMI/LCD switch
     chown system system /sys/class/display/mode
-    chown media system /sys/class/display/axis
+    chown system graphics /sys/class/display/axis
     chown system system /sys/class/graphics/fb0/scale
     chown system system /sys/class/graphics/fb1/scale
     chown system system /sys/class/graphics/fb0/scale_axis
