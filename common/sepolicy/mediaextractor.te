@@ -4,3 +4,4 @@ allow mediaextractor exfat:file { read getattr };
 allow mediaextractor ntfs:file { read getattr };
 allow mediaextractor vfat:file { read getattr };
 allow mediaextractor fuseblk:file { read getattr };
+allow mediaextractor fuse:file { read getattr };
