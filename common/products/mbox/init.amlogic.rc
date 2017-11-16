@@ -38,8 +38,6 @@ on init
 
     # for tee
     mkdir /tee 0700 system system
-    wait /dev/block/tee 1000
-    confirm_formated ext4 /dev/block/tee /tee
 
 on fs
     mount_all /fstab.amlogic
@@ -349,13 +347,6 @@ on boot
 
     write /sys/class/vfm/map "rm default"
     write /sys/class/vfm/map "add default decoder ppmgr deinterlace amvideo"
-
-on aml-firstboot-init
-    #format data and cache patrition if not exist
-    wait /dev/block/data 20
-    confirm_formated ext4 /dev/block/data /data
-    wait /dev/block/cache 20
-    confirm_formated ext4 /dev/block/cache /cache
 
 # virtual sdcard daemon running as media_rw (1023)
 #service sdcard /system/bin/sdcard -u 1023 -g 1023 /data/media /mnt/shell/emulated

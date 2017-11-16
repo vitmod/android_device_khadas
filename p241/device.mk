@@ -15,22 +15,14 @@
 #
 
 ifneq ($(BOARD_USES_RECOVERY_AS_BOOT), true)
-ifeq ($(AB_OTA_UPDATER),true)
-PRODUCT_COPY_FILES += device/amlogic/common/products/mbox/init.amlogic.ab.rc:root/init.amlogic.rc
-else
 PRODUCT_COPY_FILES += device/amlogic/common/products/mbox/init.amlogic.rc:root/init.amlogic.rc
-endif
 
 PRODUCT_COPY_FILES += \
     device/amlogic/p241/init.amlogic.usb.rc:root/init.amlogic.usb.rc \
     device/amlogic/common/products/mbox/ueventd.amlogic.rc:root/ueventd.amlogic.rc \
     device/amlogic/p241/init.amlogic.board.rc:root/init.amlogic.board.rc
 else
-ifeq ($(AB_OTA_UPDATER),true)
-PRODUCT_COPY_FILES += device/amlogic/common/products/mbox/init.amlogic.ab.rc:recovery/root/init.amlogic.rc
-else
 PRODUCT_COPY_FILES += device/amlogic/common/products/mbox/init.amlogic.rc:recovery/root/init.amlogic.rc
-endif
 
 PRODUCT_COPY_FILES += \
     device/amlogic/p241/init.amlogic.usb.rc:recovery/root/init.amlogic.usb.rc \
