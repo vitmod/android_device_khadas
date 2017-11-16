@@ -13,6 +13,9 @@ ro.autoconnectbt.macprefix=00:CD:FF
 ro.autoconnectbt.btclass=50c
 ro.autoconnectbt.nameprefix=Amlogic_RC
 
+#for cts test disable quota
+fw.disable_quota=true
+
 #if wifi Only
 ro.radio.noril=false
 
