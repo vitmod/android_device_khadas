@@ -79,3 +79,6 @@ allow system_app droidvold_hwservice:hwservice_manager { find };
 allow system_app droidvold:binder { call transfer };
 
 allow system_app droidmount_service:service_manager { add };
+
+allow system_app fuseblk:dir create_dir_perms;
+allow system_app fuseblk:file create_file_perms;
