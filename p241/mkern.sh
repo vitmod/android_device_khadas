@@ -24,6 +24,7 @@ make -C common O=../$KERNEL_OUT ARCH=arm64 -j6 CROSS_COMPILE=$PREFIX_CROSS_COMPI
 
 if [ "$2" != "m" ]; then
     make -C common O=../$KERNEL_OUT gxl_p241_1g.dtb ARCH=arm64 CROSS_COMPILE=$PREFIX_CROSS_COMPILE PARTITION_DTSI=partition_mbox.dtsi
+    make -C common O=../$KERNEL_OUT gxl_p241_v2-1g.dtb ARCH=arm64 CROSS_COMPILE=$PREFIX_CROSS_COMPILE PARTITION_DTSI=partition_mbox.dtsi
 fi
 
 if [ "$2" != "m" ]; then
