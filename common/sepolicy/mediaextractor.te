@@ -7,3 +7,4 @@ allow mediaextractor fuseblk:file { read getattr };
 allow mediaextractor fuse:file { read getattr };
 allow mediaextractor sdcardfs:file { read getattr };
 allow mediaextractor system_server:fifo_file { write getattr append };
+allow mediaextractor vendor_file:file { read open getattr execute };

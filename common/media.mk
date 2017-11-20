@@ -21,14 +21,52 @@
 
 
 #for amlogicplayer& liblayer related.
-TARGET_WITH_AMLOGIC_EXTRATORS :=true
-TARGET_WITH_AMLOGIC_SCREAN_MEDIASOURCE :=true
-TARGET_WITH_AMLOGIC_RETRIEVER :=true
-TARGET_WITH_AMLOGIC_PLAYERS :=true
-TARGET_WITH_AMNUPLAYER :=true
+#TARGET_WITH_AMLOGIC_EXTRATORS :=true
+#TARGET_WITH_AMLOGIC_SCREAN_MEDIASOURCE :=true
+#TARGET_WITH_AMLOGIC_RETRIEVER :=true
+#TARGET_WITH_AMLOGIC_PLAYERS :=true
+#TARGET_WITH_AMNUPLAYER :=true
+TARGET_WITH_MEDIA_EXT_LEVEL := 1
 #set on some prducts,used libplayer.
 BUILD_WITH_BOOT_PLAYER :=true
-TARGET_WITH_AMLOGIC_SWCODEC :=true
+
+#########################################################################
+#
+#                     media ext
+#
+#########################################################################
+ifeq ($(TARGET_WITH_MEDIA_EXT_LEVEL), 1)
+    TARGET_WITH_MEDIA_EXT :=true
+    TARGET_WITH_SWCODEC_EXT :=true
+else
+ifeq ($(TARGET_WITH_MEDIA_EXT_LEVEL), 2)
+    TARGET_WITH_MEDIA_EXT :=true
+    TARGET_WITH_SWCODEC_EXT := true
+    TARGET_WITH_CODEC_EXT := true
+else
+ifeq ($(TARGET_WITH_MEDIA_EXT_LEVEL), 3)
+    TARGET_WITH_MEDIA_EXT :=true
+    TARGET_WITH_SWCODEC_EXT := true
+    TARGET_WITH_CODEC_EXT := true
+    TARGET_WITH_PLAYERS_EXT :=true
+endif
+endif
+endif
+
+ifeq ($(TARGET_WITH_MEDIA_EXT), true)
+PRODUCT_PACKAGES += \
+    libammediaext \
+    libamffmpeg \
+    libamffmpegadapter
+endif
+#soft codec related.
+#
+ifeq ($(TARGET_WITH_SWCODEC_EXT), true)
+PRODUCT_PACKAGES += \
+    libOmxCoreSw \
+    libstagefright_soft_amsoftdec
+
+endif
 
 #########################################################################
 #
@@ -113,14 +151,6 @@ PRODUCT_PACKAGES += \
     libstagefright_soft_ddpdcv \
 
 
-#soft codec related.
-#
-ifeq ($(TARGET_WITH_AMLOGIC_SWCODEC), true)
-PRODUCT_PACKAGES += \
-    libstagefright_soft_amsoftdec\
-    libstagefright_soft_amsoftadec
-
-endif
 
 #for drm widevine.
 PRODUCT_PROPERTY_OVERRIDES += drm.service.enable=true
@@ -244,3 +274,4 @@ BOARD_AML_LIBAUDIO_PATH := hardware/amlogic/LibAudio/
 # for media modules
 PRODUCT_COPY_FILES += \
 	device/amlogic/common/init.amlogic.media.rc:root/init.amlogic.media.rc
+
