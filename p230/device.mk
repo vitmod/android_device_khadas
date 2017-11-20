@@ -29,12 +29,27 @@ PRODUCT_COPY_FILES += \
     device/amlogic/p230/files/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml \
     device/amlogic/p230/files/mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths.xml \
     device/amlogic/p230/files/mesondisplay.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/mesondisplay.cfg \
+    device/amlogic/p230/files/remote.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/remote.cfg \
+    device/amlogic/p230/files/remote.tab1:$(TARGET_COPY_OUT_VENDOR)/etc/remote.tab1 \
+    device/amlogic/p230/files/remote.tab2:$(TARGET_COPY_OUT_VENDOR)/etc/remote.tab2 \
+    device/amlogic/p230/files/remote.tab3:$(TARGET_COPY_OUT_VENDOR)/etc/remote.tab3 \
     frameworks/native/data/etc/android.hardware.hdmi.cec.xml:system/etc/permissions/android.hardware.hdmi.cec.xml \
     device/amlogic/p230/manifest.xml:$(TARGET_COPY_OUT_VENDOR)/manifest.xml
 
+PRODUCT_COPY_FILES += \
+    device/amlogic/p230/recovery/init.recovery.amlogic.rc:root/init.recovery.amlogic.rc \
+    device/amlogic/p230/recovery/recovery.kl:recovery/root/etc/recovery.kl \
+    device/amlogic/p230/files/mesondisplay.cfg:recovery/root/etc/mesondisplay.cfg \
+    device/amlogic/p230/recovery/busybox:recovery/root/sbin/busybox \
+    device/amlogic/p230/recovery/remotecfg:recovery/root/sbin/remotecfg \
+    device/amlogic/p230/files/remote.cfg:recovery/root/etc/remote.cfg \
+    device/amlogic/p230/files/remote.tab1:recovery/root/etc/remote.tab1 \
+    device/amlogic/p230/files/remote.tab2:recovery/root/etc/remote.tab2 \
+    device/amlogic/p230/files/remote.tab3:recovery/root/etc/remote.tab3 \
+    device/amlogic/p230/recovery/sh:recovery/root/sbin/sh
+
 # remote IME config file
 PRODUCT_COPY_FILES += \
-    device/amlogic/p230/files/remote.conf:$(TARGET_COPY_OUT_VENDOR)/etc/remote.conf \
     device/amlogic/p230/files/Vendor_0001_Product_0001.kl:/$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/Vendor_0001_Product_0001.kl \
     device/amlogic/p230/files/Generic.kl:/$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/Generic.kl
 PRODUCT_AAPT_CONFIG := xlarge hdpi xhdpi

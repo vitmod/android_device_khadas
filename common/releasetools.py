@@ -26,12 +26,32 @@ def SetBootloaderEnv(script, name, val):
   """Set bootloader env name with val."""
   script.AppendExtra('set_bootloader_env("%s", "%s");' % (name, val))
 
+def LoadInfoDict_amlogic(info_dict, input_file, input_dir=None):
+  """Read and parse the META/misc_info.txt key/value pairs from the
+  input target files and return a dict."""
+
+  data = input_file.read("VENDOR/build.prop")
+  data += input_file.read("VENDOR/default.prop")
+
+  info_dict["vendor.prop"] = common.LoadDictionaryFromLines(data.split("\n"))
+
+  print("--- *************** ---")
+  common.DumpInfoDict(info_dict)
+
+  return True
+
 def GetBuildProp(prop, info_dict):
   """Return the fingerprint of the build of a given target-files info_dict."""
   try:
     return info_dict.get("build.prop", {})[prop]
   except KeyError:
-    raise common.ExternalError("couldn't find %s in build.prop" % (prop,))
+    print "couldn't find %s in build.prop, try vendor.prop" %(prop)
+    #raise common.ExternalError("couldn't find %s in build.prop" % (prop,))
+
+  try:
+    return info_dict.get("vendor.prop", {})[prop]
+  except KeyError:
+    raise common.ExternalError("couldn't find %s in build.prop & vendor.prop" % (prop,))
 
 def HasTargetImage(target_files_zip, image_path):
   try:
@@ -120,6 +140,7 @@ def FullOTA_Assertions(info):
 
 def FullOTA_InstallBegin(info):
   print "amlogic extensions:FullOTA_InstallBegin"
+  LoadInfoDict_amlogic(info.info_dict, info.input_zip);
   platform = GetBuildProp("ro.board.platform", info.info_dict)
   print "ro.board.platform: %s" % (platform)
   if "meson3" in platform:
@@ -157,6 +178,7 @@ def IncrementalOTA_VerifyEnd(info):
   print "amlogic extensions:IncrementalOTA_VerifyEnd"
 
 def IncrementalOTA_InstallBegin(info):
+  LoadInfoDict_amlogic(info.info_dict, info.input_zip);
   platform = GetBuildProp("ro.board.platform", info.info_dict)
   print "ro.board.platform: %s" % (platform)
   if "meson3" in platform:

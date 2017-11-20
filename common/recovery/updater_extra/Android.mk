@@ -17,5 +17,6 @@ LOCAL_C_INCLUDES += $(LOCAL_PATH)/../
 LOCAL_FORCE_STATIC_EXECUTABLE := true
 
 LOCAL_STATIC_LIBRARIES += libbootloader_message libfs_mgr libselinux
+LOCAL_STATIC_LIBRARIES += libenv libsystemcontrol_static libsecurity libdtb
 
 include $(BUILD_STATIC_LIBRARY)

@@ -17,6 +17,7 @@ struct CtrlInfo_t {
     int value;
 };
 
+void fb_set();
 int getKey(char *key);
 void load_key_map();
 int getMapKey(int key);
