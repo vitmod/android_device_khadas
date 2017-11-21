@@ -203,8 +203,7 @@ PRODUCT_DEFAULT_WIFI_CHANNELS := 11
 #########################################################################
 
 BOARD_HAVE_BLUETOOTH := true
-#MULTI_BLUETOOTH_SUPPORT := true
-BLUETOOTH_MODULE := AP6335
+MULTI_BLUETOOTH_SUPPORT := true
 BCM_BLUETOOTH_LPM_ENABLE := true
 include device/amlogic/common/bluetooth.mk
 
