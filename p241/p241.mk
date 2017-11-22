@@ -17,7 +17,7 @@
 # build for Meson reference board.
 #
 
-ANDROID_BUILD_TYPE := 64
+ANDROID_BUILD_TYPE := 32
 
 # Dynamic enable start/stop zygote_secondary in 64bits
 # and 32bit system, default closed
