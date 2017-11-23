@@ -258,6 +258,16 @@ on boot
     chown media system /sys/module/deinterlace/parameters/deinterlace_mode
     chown media system /sys/class/graphics/fb0/block_mode
 
+    chown mediacodec media /sys/module/amvdec_h265/parameters/buffer_mode
+    chown mediacodec media /sys/module/amvdec_h265/parameters/buf_alloc_width
+    chown mediacodec media /sys/module/amvdec_h265/parameters/buf_alloc_height
+    chown mediacodec media /sys/module/amvdec_h265/parameters/dynamic_buf_num_margin
+
+    chown mediacodec media /sys/module/amvdec_vp9/parameters/buffer_mode
+    chown mediacodec media /sys/module/amvdec_vp9/parameters/double_write_mode
+    chown mediacodec media /sys/module/amvdec_vp9/parameters/buf_alloc_width
+    chown mediacodec media /sys/module/amvdec_vp9/parameters/buf_alloc_height
+
     # HDMI/LCD switch
     chown system system /sys/class/display/mode
     chown media system /sys/class/display/axis
