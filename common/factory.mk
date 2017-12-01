@@ -19,7 +19,37 @@ BUILT_IMAGES += cache.img
 endif
 
 ifneq ($(BOARD_OLD_PARTITION),true)
-BUILT_IMAGES += vendor.img odm.img
+BUILT_IMAGES += vendor.img
+ifeq ($(BOARD_USES_ODMIMAGE),true)
+BUILT_IMAGES += odm.img
+endif
+endif
+
+# -----------------------------------------------------------------
+# odm partition image
+ifdef BOARD_ODMIMAGE_FILE_SYSTEM_TYPE
+INTERNAL_ODMIMAGE_FILES := \
+    $(filter $(TARGET_OUT_ODM)/%,$(ALL_DEFAULT_INSTALLED_MODULES))
+
+odmimage_intermediates := \
+    $(call intermediates-dir-for,PACKAGING,odm)
+BUILT_ODMIMAGE_TARGET := $(PRODUCT_OUT)/odm.img
+# We just build this directly to the install location.
+INSTALLED_ODMIMAGE_TARGET := $(BUILT_ODMIMAGE_TARGET)
+
+$(INSTALLED_ODMIMAGE_TARGET) : $(INTERNAL_USERIMAGES_DEPS) $(INTERNAL_ODMIMAGE_FILES) $(PRODUCT_OUT)/system.img
+	$(call pretty,"Target odm fs image: $(INSTALLED_ODMIMAGE_TARGET)")
+	@mkdir -p $(TARGET_OUT_ODM)
+	@mkdir -p $(odmimage_intermediates) && rm -rf $(odmimage_intermediates)/odm_image_info.txt
+	$(call generate-userimage-prop-dictionary, $(odmimage_intermediates)/odm_image_info.txt, skip_fsck=true)
+	mkuserimg.sh -s $(PRODUCT_OUT)/odm $(INSTALLED_ODMIMAGE_TARGET) $(BOARD_ODMIMAGE_FILE_SYSTEM_TYPE) odm $(BOARD_ODMIMAGE_PARTITION_SIZE) -D $(PRODUCT_OUT)/system -L odm $(PRODUCT_OUT)/obj/ETC/file_contexts.bin_intermediates/file_contexts.bin
+	make_ext4fs -s -T -1 -S $(PRODUCT_OUT)/obj/ETC/file_contexts.bin_intermediates/file_contexts.bin -L odm -l $(BOARD_ODMIMAGE_PARTITION_SIZE) -a odm $(INSTALLED_ODMIMAGE_TARGET) $(PRODUCT_OUT)/odm $(PRODUCT_OUT)/system
+	$(hide) $(call assert-max-image-size,$(INSTALLED_ODMIMAGE_TARGET),$(BOARD_ODMIMAGE_PARTITION_SIZE))
+
+.PHONY: odm_image
+odm_image : $(INSTALLED_ODMIMAGE_TARGET)
+$(call dist-for-goals, odm_image, $(INSTALLED_ODMIMAGE_TARGET))
+
 endif
 
 ifdef KERNEL_DEVICETREE
@@ -259,7 +289,10 @@ FASTBOOT_IMAGES += boot.img recovery.img
 endif
 
 ifneq ($(BOARD_OLD_PARTITION),true)
-FASTBOOT_IMAGES += vendor.img odm.img
+FASTBOOT_IMAGES += vendor.img
+ifeq ($(BOARD_USES_ODMIMAGE),true)
+FASTBOOT_IMAGES += odm.img
+endif
 endif
 
 .PHONY:aml_fastboot_zip

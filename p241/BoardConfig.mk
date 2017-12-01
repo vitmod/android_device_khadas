@@ -85,6 +85,8 @@ endif
 TARGET_SUPPORT_USB_BURNING_V2 := true
 TARGET_AMLOGIC_RES_PACKAGE := device/amlogic/p241/logo_img_files
 
+TARGET_RECOVERY_FSTAB := device/amlogic/p212/recovery/recovery.fstab
+
 #BOARD_HAL_STATIC_LIBRARIES := libhealthd.mboxdefault
 
 USE_E2FSPROGS := true
@@ -101,8 +103,15 @@ TARGET_OTA_UPDATE_DTB := true
 #TARGET_RECOVERY_DISABLE_ADB_SIDELOAD := true
 #TARGET_OTA_PARTITION_CHANGE := true
 
+TARGET_RECOVERY_PIXEL_FORMAT := BGRA_8888
+TARGET_RECOVERY_UI_LIB += libamlogic_ui
+TARGET_RECOVERY_UI_LIB += \
+    librecovery_amlogic \
+    libenv \
+    libsystemcontrol_static
 ifneq ($(AB_OTA_UPDATER),true)
 TARGET_RECOVERY_UPDATER_LIBS := libinstall_amlogic
+TARGET_RECOVERY_UPDATER_EXTRA_LIBS += libenv libsystemcontrol_static libsecurity libdtb
 endif
 
 include device/amlogic/common/sepolicy.mk

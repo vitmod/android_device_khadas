@@ -5,6 +5,48 @@
 
 #include "amlogic_ui.h"
 
+#include "common.h"
+#include "device.h"
+#include "screen_ui.h"
+#include "ui.h"
+#include "recovery_extra/recovery_amlogic.h"
+
+#include <errno.h>
+#include <fcntl.h>
+#include <limits.h>
+#include <sys/stat.h>
+#include <sys/wait.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/mount.h>
+#include <string.h>
+#include <ziparchive/zip_archive.h>
+#include <android-base/logging.h>
+#include "cutils/properties.h"
+
+#include <fcntl.h>
+#include <linux/fb.h>
+#include <sys/ioctl.h>
+#include <sys/mman.h>
+#include <sys/types.h>
+#include <unistd.h>
+
+#define FB_ACTIVATE_FORCE     128	/* force apply even when no change*/
+
+
+class AmlogicDevice : public Device {
+  public:
+    AmlogicDevice(ScreenRecoveryUI* ui) : Device(ui) { }
+};
+
+Device* make_device() {
+  amlogic_init();
+  load_key_map();
+  fb_set();
+  return new AmlogicDevice(new ScreenRecoveryUI);
+}
+
+
 int num_keys;
 KeyMapItem_t* keys_map;
 
@@ -25,6 +67,28 @@ static KeyMapItem_t g_presupposed_keymap[] = {
 };
 
 #define NUM_PRESUPPOSED_KEY_MAP (sizeof(g_presupposed_keymap) / sizeof(g_presupposed_keymap[0]))
+
+void fb_set() {
+  fb_var_screeninfo vi2;
+  int fd = open("/dev/graphics/fb0", O_RDWR);
+  if (fd == -1) {
+      printf("cannot open fb0");
+  }
+
+  if (ioctl(fd, FBIOGET_VSCREENINFO, &vi2) < 0) {
+      printf("failed to get fb0 info");
+      close(fd);
+  }
+
+  vi2.nonstd=1;
+  vi2.transp.length=0;
+  vi2.activate = FB_ACTIVATE_FORCE;
+  if (ioctl(fd, FBIOPUT_VSCREENINFO, &vi2) < 0) {
+      printf("active fb swap failed");
+  }
+
+  close(fd);
+}
 
 
 int getKey(char *key) {
@@ -119,9 +183,11 @@ void load_key_map() {
 
 int getMapKey(int key) {
     int i,j;
+    printf("******getMapKey, key: %d  0x%x\n", key, key);
     for (i = 0; i < num_keys; i++) {
         KeyMapItem_t* v = &keys_map[i];
         for (j = 0; j < 6; j++) {
+            printf("******v->key[%d]=0x%x, value=0x%x\n", j, v->key[j], v->value);
             if (v->key[j] == key)
                 return v->value;
         }

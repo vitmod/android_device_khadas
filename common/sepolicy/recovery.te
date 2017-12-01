@@ -29,6 +29,11 @@ allow recovery uboot_prop:file {open read getattr};
 allow recovery update_data_file:file rw_file_perms;
 allow recovery update_data_file:dir { search read write open };
 
+allow recovery graphics_device:dir {search};
+allow recovery graphics_device:chr_file {open read write ioctl};
+
+allow shell rootfs:file { entrypoint execute getattr open read };
+
 allow shell tmpfs:file {open read getattr};
-allow shell sysfs:file {read};
+allow shell sysfs:file { read open };
 allow shell rootfs:file {execute_no_trans};

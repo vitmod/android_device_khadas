@@ -487,15 +487,11 @@ int RecoverySecureCheck(const ZipArchiveHandle zipArchive)
     int i = 0, ret = -1, err = -1;
     int ret_dtb = 0;
     int imageSize = 0;
-    char platform[PROPERTY_VALUE_MAX+1] = {0};
     int platformEncryptStatus = 0, imageEncryptStatus = 0;
     const char *pImageName[] = {
             BOOTLOADER_IMG,
             BOOT_IMG,
             RECOVERY_IMG };
-
-    property_get("ro.board.platform", platform, "unknow");
-    printf("platform:%s\n", platform);
 
     platformEncryptStatus = IsPlatformEncrypted();
     if (platformEncryptStatus ==  2) {

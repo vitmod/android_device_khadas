@@ -33,11 +33,6 @@ static const int MAX_ARG_LENGTH = 4096;
 static const char *UDISK_COMMAND_FILE = "/udisk/factory_update_param.aml";
 static const char *SDCARD_COMMAND_FILE = "/sdcard/factory_update_param.aml";
 
-extern "C"
-{
-    extern int remoteinit(const char* path);
-}
-
 void setup_cache_mounts() {
     int ret = 0;
     ret = ensure_path_mounted("/cache");
@@ -354,7 +349,6 @@ int ensure_path_mounted_extra(Volume *v) {
 void amlogic_init() {
     set_display_mode("/etc/mesondisplay.cfg");
     sleep(1);
-    remoteinit("/etc/remote.conf");
 }
 
 void amlogic_get_args(std::vector<std::string>& args) {

@@ -10,6 +10,10 @@ LOCAL_MODULE_TAGS := eng
 
 LOCAL_C_INCLUDES += bootable/recovery
 
+LOCAL_C_INCLUDES += \
+    system/vold \
+    system/core/adb
+
 LOCAL_C_INCLUDES += system/core/base/include
 
 LOCAL_C_INCLUDES += bootable/recovery/bootloader_message/include
