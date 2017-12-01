@@ -56,7 +56,6 @@ PRODUCT_PACKAGES += \
 endif
 
 PRODUCT_PACKAGES += \
-    Camera2 \
     Gallery2 \
     OneTimeInitializer \
     Provision \
@@ -161,6 +160,7 @@ PRODUCT_PACKAGES += \
     Browser2 \
     LatinIME \
     Settings \
+    Camera2 \
     Music
 endif
 
