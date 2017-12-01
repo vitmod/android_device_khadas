@@ -1,0 +1,3 @@
+add_lunch_combo txlx_t962e_r321-eng
+add_lunch_combo txlx_t962e_r321-user
+add_lunch_combo txlx_t962e_r321-userdebug

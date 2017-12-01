@@ -45,11 +45,11 @@ on init
 
     # for tee
     mkdir /tee 0700 system system
-    wait /dev/block/tee 1000
-    confirm_formated ext4 /dev/block/tee /tee
 
-on post-fs
-    restorecon_recursive /param
+on fs
+    mount_all /fstab.amlogic
+    setprop ro.crypto.fuse_sdcard true
+    swapon_all /fstab.amlogic
 
 on post-fs-data
     mkdir /data/misc/wifi 0770 wifi wifi
@@ -77,9 +77,6 @@ on post-fs-data
     write /sys/class/amlfe/setting autoload
 
 on boot
-
-
-
     # Set up kernel tracing, but disable it by default
     chmod 0222 /sys/kernel/debug/tracing/trace_marker
     write /sys/kernel/debug/tracing/tracing_on 0
@@ -95,16 +92,14 @@ on boot
     chmod 0660 /proc/bluetooth/sleep/lpm
     # change back to bluetooth from system
     chown bluetooth bluetooth /data/misc/bluetooth
-    chown bluetooth bluetooth /etc/bluetooth/rc.conf
-    insmod /vendor/lib/modules/btusb.ko
-    mknod btusb0 c 180 194
+
     write /sys/block/mmcblk0/queue/read_ahead_kb 2048
     write /sys/block/mmcblk1/queue/read_ahead_kb 2048
 
     chown system mediadrm /sys/class/amhdmitx/amhdmitx0/aud_ch
     chmod 0664 /sys/class/amhdmitx/amhdmitx0/aud_ch
     insmod  /vendor/lib/modules/aml_thermal.ko
-    #insmod  /vendor/lib/modules/ddr_window_64.ko
+    insmod  /vendor/lib/modules/ddr_window_64.ko
 
     chown media system /sys/class/tsync/pts_video
     chown system mediadrm /sys/class/tsync/pts_audio
@@ -143,9 +138,6 @@ on boot
     chown system system /sys/class/ppmgr/ppscaler
     chown media system /sys/class/ppmgr/ppscaler_rect
     chown media system /sys/class/ppmgr/vtarget
-    chown media system /sys/class/ppmgr/tb_detect
-    chmod 0664 /sys/class/ppmgr/tb_detect
-    write /sys/class/ppmgr/tb_detect 2
 
     chown media system /sys/class/amaudio/audio_channels_mask
     chown media system /sys/class/amaudio/enable_resample
@@ -170,8 +162,11 @@ on boot
     chmod 666 /sys/class/tsync/pts_pcrscr
     chmod 666 /dev/amstream_abuf
     chmod 666 /dev/amstream_hevc
+    chmod 666 /dev/amstream_hevc_frame
+    chmod 666 /dev/amstream_hevc_sched
     chmod 666 /dev/amstream_mpps
     chmod 666 /dev/amstream_mpts
+    chmod 666 /dev/amstream_mpts_sched
     chmod 666 /dev/amstream_rm
     chmod 666 /dev/amstream_sub
     chmod 666 /dev/amstream_sub_read
@@ -179,12 +174,10 @@ on boot
     chmod 666 /dev/amstream_vbuf
     chmod 666 /dev/amstream_vframe
     chmod 666 /dev/amstream_vbuf_sched
-    chmod 666 /dev/amstream_hevc_frame
-    chmod 666 /dev/amstream_hevc_sched
-    chmod 666 /dev/amstream_mpts_sched
     chmod 666 /dev/amstream_dves_avc
     chmod 666 /dev/amstream_dves_hevc
     chmod 666 /dev/amvideo
+    chmod 666 /dev/ionvideo
 #add for XBMC BlueRay 3d and audio Passthrough
     chmod 666 /sys/class/audiodsp/digital_raw
     chmod 666 /sys/class/audiodsp/digital_codec
@@ -230,6 +223,7 @@ on boot
     chown media system /dev/dvb0.dvr0
     chown media system /dev/dvb0.dvr1
     chmod media system /dev/dvb0.dvr2
+
     chown media system /sys/class/stb/demux0_source
     chown media system /sys/class/stb/demux1_source
     chown media system /sys/class/stb/demux2_source
@@ -373,30 +367,8 @@ on boot
     chown root system /sys/module/di/parameters/det3d_en
     chown root system /sys/module/di/parameters/prog_proc_config
 
-#   start sdcard
-
     write /sys/class/vfm/map "rm default"
     write /sys/class/vfm/map "add default decoder ppmgr deinterlace amvideo"
-
-on fs
-    mount_all /fstab.amlogic
-    setprop ro.crypto.fuse_sdcard true
-    swapon_all /fstab.amlogic
-
-on aml-firstboot-init
-    #format data and cache patrition if not exist
-    wait /dev/block/data 20
-    confirm_formated ext4 /dev/block/data /data
-    wait /dev/block/cache 20
-    confirm_formated ext4 /dev/block/cache /cache
-     wait /dev/block/param 20
-    confirm_formated ext4 /dev/block/param /param
-
-service tvd /vendor/bin/tvserver
-   class core
-   user root
-   group system
-   seclabel u:r:tvserver:s0
 
 # virtual sdcard daemon running as media_rw (1023)
 #service sdcard /system/bin/sdcard -u 1023 -g 1023 /data/media /mnt/shell/emulated
@@ -428,6 +400,7 @@ service watchdogd /sbin/watchdogd 10 20
     disabled
     seclabel u:r:watchdogd:s0
 
+
 # on userdebug and eng builds, enable kgdb on the serial console
 on property:ro.debuggable=1
     write /sys/module/kgdboc/parameters/kgdboc ttyFIQ2
@@ -437,18 +410,6 @@ service remotecfg /vendor/bin/remotecfg /vendor/etc/remote.conf
     class main
     oneshot
     seclabel u:r:remotecfg:s0
-
-service pppoe_wrapper /vendor/bin/pppoe_wrapper
-    class main
-    group system inet
-    oneshot
-    seclabel u:r:pppoe_wrapper:s0
-
-service imageserver /vendor/bin/imageserver
-    class main
-    user root
-    group system
-    seclabel u:r:imageserver:s0
 
 service bootvideo /vendor/bin/bootplayer /vendor/etc/bootvideo
     class main
@@ -463,12 +424,11 @@ service hdcp_tx22 /vendor/bin/hdcp_tx22 \
     disabled
     oneshot
 
-service hdcp_rx22 /vendor/bin/hdcp_rx22 \
-    -f /vendor/etc/firmware/firmware.le
+service ddrtest /vendor/bin/ddrtest.sh
     class main
-    disabled
+    user root
+    group root
     oneshot
-    seclabel u:r:hdcp_rx22:s0
 
 service factoryreset /vendor/bin/factoryreset.sh
     class main

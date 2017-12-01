@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <bool name="display_need_hdr_function">true</bool>
+    <bool name="display_need_sdr_function">false</bool>
+    <bool name="display_need_digital_sounds">true</bool>
+    <bool name="display_need_screen_resolution">true</bool>
+    <bool name="display_need_hdmicec_function">true</bool>
+    <bool name="display_need_playback_set_function">true</bool>
+    <bool name="display_need_bluetooth_remote_function">true</bool>
+    <bool name="tv_pq_need_pictrue_mode">true</bool>
+    <bool name="tv_pq_need_brightness">true</bool>
+    <bool name="tv_pq_need_contrast">true</bool>
+    <bool name="tv_pq_need_color">true</bool>
+    <bool name="tv_pq_need_sharpness">true</bool>
+    <bool name="tv_pq_need_tone">true</bool>
+    <bool name="tv_pq_need_color_temprature">false</bool>
+    <bool name="tv_pq_need_dnr">true</bool>
+</resources>
