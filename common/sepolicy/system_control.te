@@ -101,3 +101,5 @@ allow system_control env_device:blk_file { getattr read open write };
 allow system_control self:capability sys_nice;
 
 allow system_control system_app:binder { call };
+allow system_control droidvold_hwservice:hwservice_manager { find };
+allow system_control droidvold:binder { call };
