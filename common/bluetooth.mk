@@ -65,7 +65,7 @@ endif
 ################################################################################## bcm40183
 ifeq ($(BLUETOOTH_MODULE),bcm40183)
 
-BOARD_HAVE_BLUETOOTH_AMLOGIC := true
+BOARD_HAVE_BLUETOOTH_BROADCOM := true
 
 PRODUCT_COPY_FILES += device/amlogic/common/tools/BCM40183B2_26M.hcd:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth/BCM4330.hcd
 
@@ -87,7 +87,7 @@ endif
 ################################################################################## AP6269
 ifeq ($(BLUETOOTH_MODULE),AP6269)
 
-BOARD_HAVE_BLUETOOTH_AMLOGIC := true
+BOARD_HAVE_BLUETOOTH_BROADCOM := true
 BCM_USB_BT := true
 
 PRODUCT_COPY_FILES += hardware/amlogic/wifi/bcm_ampak/config/AP6269/BT/bcm43569a2.hcd:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth/bcm43569a2.hcd
@@ -103,7 +103,7 @@ endif
 ################################################################################## AP62x8
 ifeq ($(BLUETOOTH_MODULE),AP62x8)
 
-BOARD_HAVE_BLUETOOTH_AMLOGIC := true
+BOARD_HAVE_BLUETOOTH_BROADCOM := true
 BCM_USB_BT := true
 BCM_USB_WAKEUP := true
 PRODUCT_COPY_FILES += hardware/amlogic/wifi/bcm_ampak/config/AP62x8/bcm43569a2.hcd:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth/bcm43569a2.hcd
@@ -120,7 +120,7 @@ endif
 ################################################################################## AP6242
 ifeq ($(BLUETOOTH_MODULE),AP6242)
 
-BOARD_HAVE_BLUETOOTH_AMLOGIC := true
+BOARD_HAVE_BLUETOOTH_BROADCOM := true
 BCM_USB_BT := true
 
 PRODUCT_COPY_FILES += hardware/amlogic/wifi/bcm_ampak/config/AP6242/BT/bcm43242a1.hcd:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth/bcm43242a1.hcd
@@ -136,7 +136,7 @@ endif
 ################################################################################## AP6210
 ifeq ($(BLUETOOTH_MODULE),AP6210)
 
-BOARD_HAVE_BLUETOOTH_AMLOGIC := true
+BOARD_HAVE_BLUETOOTH_BROADCOM := true
 
 PRODUCT_COPY_FILES += hardware/amlogic/wifi/bcm_ampak/config/AP6210/BT/bcm20710a1.hcd:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth/BCM20702.hcd
 
@@ -157,7 +157,7 @@ endif
 ################################################################################## AP6476
 ifeq ($(BLUETOOTH_MODULE),AP6476)
 
-BOARD_HAVE_BLUETOOTH_AMLOGIC := true
+BOARD_HAVE_BLUETOOTH_BROADCOM := true
 
 PRODUCT_COPY_FILES += hardware/amlogic/wifi/bcm_ampak/config/AP6476/GPS/bcm2076b1.hcd:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth/BCM2076.hcd
 
@@ -179,7 +179,7 @@ endif
 ################################################################################## AP6330
 ifeq ($(BLUETOOTH_MODULE),AP6330)
 
-BOARD_HAVE_BLUETOOTH_AMLOGIC := true
+BOARD_HAVE_BLUETOOTH_BROADCOM := true
 
 PRODUCT_COPY_FILES += hardware/amlogic/wifi/bcm_ampak/config/AP6330/BT/bcm40183b2.hcd:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth/BCM4330.hcd
 
@@ -214,7 +214,7 @@ endif
 ################################################################################## AP62x2
 ifeq ($(BLUETOOTH_MODULE),AP62x2)
 
-BOARD_HAVE_BLUETOOTH_AMLOGIC := true
+BOARD_HAVE_BLUETOOTH_BROADCOM := true
 
 PRODUCT_COPY_FILES += hardware/amlogic/wifi/bcm_ampak/config/62x2/BT/bcm43241b4.hcd:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth/bcm43241b4.hcd
 
@@ -228,7 +228,7 @@ endif
 ################################################################################## AP6335
 ifeq ($(BLUETOOTH_MODULE),AP6335)
 
-BOARD_HAVE_BLUETOOTH_AMLOGIC := true
+BOARD_HAVE_BLUETOOTH_BROADCOM := true
 
 PRODUCT_COPY_FILES += hardware/amlogic/wifi/bcm_ampak/config/6335/BT/bcm4335c0.hcd:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth/bcm4335c0.hcd
 
@@ -242,7 +242,7 @@ endif
 ################################################################################## AP6441
 ifeq ($(BLUETOOTH_MODULE),AP6441)
 
-BOARD_HAVE_BLUETOOTH_AMLOGIC := true
+BOARD_HAVE_BLUETOOTH_BROADCOM := true
 
 PRODUCT_COPY_FILES += hardware/amlogic/wifi/bcm_ampak/config/6441/BT/bcm43341b0.hcd:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth/bcm43341b0.hcd
 
@@ -256,7 +256,7 @@ endif
 ################################################################################## AP6441
 ifeq ($(BLUETOOTH_MODULE),AP6234)
 
-BOARD_HAVE_BLUETOOTH_AMLOGIC := true
+BOARD_HAVE_BLUETOOTH_BROADCOM := true
 
 PRODUCT_COPY_FILES += hardware/amlogic/wifi/bcm_ampak/config/6234/BT/bcm43341b0.hcd:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth/bcm43341b0.hcd
 
@@ -273,7 +273,7 @@ endif
 ################################################################################## AP6212
 ifeq ($(BLUETOOTH_MODULE),AP6212)
 
-BOARD_HAVE_BLUETOOTH_AMLOGIC := true
+BOARD_HAVE_BLUETOOTH_BROADCOM := true
 
 PRODUCT_COPY_FILES += hardware/amlogic/wifi/bcm_ampak/config/6212/BT/bcm43438a0.hcd:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth/4343.hcd
 
@@ -290,7 +290,7 @@ endif
 ################################################################################## AP6354
 ifeq ($(BLUETOOTH_MODULE),AP6354)
 
-BOARD_HAVE_BLUETOOTH_AMLOGIC := true
+BOARD_HAVE_BLUETOOTH_BROADCOM := true
 
 PRODUCT_COPY_FILES += hardware/amlogic/wifi/bcm_ampak/config/4354/bcm4354a1.hcd:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth/BCM4350.hcd
 
@@ -306,7 +306,7 @@ endif
 ################################################################################## AP6255
 ifeq ($(BLUETOOTH_MODULE),AP6255)
 
-BOARD_HAVE_BLUETOOTH_AMLOGIC := true
+BOARD_HAVE_BLUETOOTH_BROADCOM := true
 
 PRODUCT_COPY_FILES += hardware/amlogic/wifi/bcm_ampak/config/6255/BT/BCM4345C0.hcd:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth/BCM4345C0.hcd
 
@@ -322,7 +322,7 @@ endif
 ################################################################################## bcm4356
 ifeq ($(BLUETOOTH_MODULE),bcm4356)
 
-BOARD_HAVE_BLUETOOTH_AMLOGIC := true
+BOARD_HAVE_BLUETOOTH_BROADCOM := true
 
 PRODUCT_COPY_FILES += hardware/amlogic/wifi/bcm_ampak/config/4356/bcm4356a2.hcd:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth/BCM4354.hcd
 PRODUCT_COPY_FILES += \
@@ -334,7 +334,7 @@ endif
 ################################################################################## bcm4358
 ifeq ($(BLUETOOTH_MODULE),bcm4358)
 
-BOARD_HAVE_BLUETOOTH_AMLOGIC := true
+BOARD_HAVE_BLUETOOTH_BROADCOM := true
 
 PRODUCT_COPY_FILES += hardware/amlogic/wifi/bcm_ampak/config/4358/BT/BCM4358A3.hcd:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth/BCM4358A3.hcd
 PRODUCT_COPY_FILES += \
@@ -347,7 +347,7 @@ endif
 ################################################################################## bcm43458
 ifeq ($(BLUETOOTH_MODULE),bcm43458)
 
-BOARD_HAVE_BLUETOOTH_AMLOGIC := true
+BOARD_HAVE_BLUETOOTH_BROADCOM := true
 
 PRODUCT_COPY_FILES += hardware/amlogic/wifi/bcm_ampak/config/43458/BCM4345C0.hcd:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth/BCM4345.hcd
 PRODUCT_COPY_FILES += \
@@ -358,7 +358,7 @@ endif
 ################################################################################## bcm43341
 ifeq ($(BLUETOOTH_MODULE),bcm43341)
 
-BOARD_HAVE_BLUETOOTH_AMLOGIC := true
+BOARD_HAVE_BLUETOOTH_BROADCOM := true
 
 PRODUCT_COPY_FILES += hardware/amlogic/wifi/bcm_usi/config/43341/BCM43341B0_002.001.014.0018.0000_USI_WM-BAN-BM-13_CL15_TESTONLY.hcd:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth/bcm43341b0.hcd
 
@@ -373,7 +373,7 @@ endif
 ################################################################################## bcm43241
 ifeq ($(BLUETOOTH_MODULE),bcm43241)
 
-BOARD_HAVE_BLUETOOTH_AMLOGIC := true
+BOARD_HAVE_BLUETOOTH_BROADCOM := true
 
 PRODUCT_COPY_FILES += hardware/amlogic/wifi/bcm_usi/config/43241/BCM4324B3_USI_WM-BAN-BM-10.hcd:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth/bcm4324b3.hcd
 
@@ -449,7 +449,7 @@ endif
 ##################################################################################multi_bt
 ifeq ($(MULTI_BLUETOOTH_SUPPORT), true)
 
-BOARD_HAVE_BLUETOOTH_AMLOGIC := true
+BOARD_HAVE_BLUETOOTH_BROADCOM := true
 #BOARD_HAVE_BLUETOOTH_RTK := true
 PRODUCT_PACKAGES += \
     libbt-vendor

@@ -114,7 +114,6 @@ TARGET_RECOVERY_UPDATER_LIBS := libinstall_amlogic
 TARGET_RECOVERY_UPDATER_EXTRA_LIBS += libenv libsystemcontrol_static libsecurity libdtb
 endif
 
-BOARD_HAVE_BLUETOOTH_AMLOGIC := true
 include device/amlogic/common/sepolicy.mk
 include device/amlogic/common/gpu/mali450-user-$(TARGET_ARCH).mk
 #MALLOC_IMPL := dlmalloc
