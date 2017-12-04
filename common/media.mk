@@ -258,9 +258,6 @@ PRODUCT_PACKAGES += \
     libtee_load_video_fw \
     tee_preload_fw \
     526fc4fc-7ee6-4a12-96e3-83da9565bce8
-
-PRODUCT_COPY_FILES += \
-	vendor/amlogic/prebuilt/videofirm/tee_preload_fw:/vendor/bin/tee_preload_fw
 endif
 #BOARD_SECCOMP_POLICY := device/amlogic/common/seccomp
 PRODUCT_COPY_FILES += \
