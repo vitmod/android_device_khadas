@@ -12,7 +12,7 @@ allow hal_wifi_default self:netlink_kobject_uevent_socket create_socket_perms_no
 allow hal_wifi_default { system_file vendor_file }:system module_load;
 
 #allow hal_wifi_default hal_wifi_default:capability chown;
-#allow hal_wifi_default kernel:system module_request;
+allow hal_wifi_default kernel:system module_request;
 
 allow hal_wifi_default wifi_data_file:dir { search };
 
