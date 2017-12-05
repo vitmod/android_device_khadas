@@ -5,7 +5,6 @@
     <!--    <feature name="android.software.device_admin" /> -->
     <feature name="android.software.leanback" />
     <feature name="android.software.leanback_only" />
-    <feature name="android.software.live_tv" />
     <!-- for google play store -->
     <feature name="nrdp.modelgroup" />
     <feature name="com.google.android.tv.installed" />
