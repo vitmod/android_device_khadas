@@ -91,3 +91,7 @@ allow droidvold fuse_device:chr_file r_file_perms;
 allow droidvold devpts:chr_file rw_file_perms;
 
 domain_auto_trans(droidvold, ntfs_3g_exec, ntfs_3g);
+
+allow droidvold loop_device:blk_file { open read write ioctl };
+allow droidvold fuseblk:dir { search };
+allow droidvold fuseblk:file { open read write };

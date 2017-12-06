@@ -38,3 +38,5 @@ allow platform_app systemcontrol_hwservice:hwservice_manager { find };
 allow platform_app system_control:binder { call };
 allow platform_app droidmount_service:service_manager { find };
 allow platform_app subtitle_service:service_manager { find };
+allow platform_app iso9660:dir { search open read getattr };
+allow platform_app iso9660:file { open read getattr };
