@@ -44,7 +44,7 @@
 allow system_app cache_recovery_file:dir { search read open write add_name remove_name };
 allow system_app cache_recovery_file:file { create getattr open read write };
 
-#allow system_app update_engine:binder {call transfer};
+allow system_app update_engine:binder {call transfer};
 #
 #allow system_app tv_prop:file {open read getattr};
 #allow system_app tv_prop:property_service {set};

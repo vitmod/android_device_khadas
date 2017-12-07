@@ -41,6 +41,8 @@ allow system_server system_app:file write;
 allow system_server isolated_app:file write;
 allow system_server bluetooth:file write;
 
+allow system_server audioserver:file write;
+
 allow system_server socket_device:sock_file { write };
 allow system_server hidraw_device:chr_file {open read write ioctl};
 allow system_server audio_prop:property_service { set };
