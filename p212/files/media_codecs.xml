@@ -215,7 +215,7 @@ Only the three quirks included above are recognized at this point:
         <MediaCodec name="OMX.google.rm40.decoder.sw" type="video/rm40" />
         <MediaCodec name="OMX.google.wmv2.decoder.sw" type="video/wmv2" />
         <MediaCodec name="OMX.google.wmv1.decoder.sw" type="video/wmv1" />
-	<MediaCodec name="OMX.google.vp8.decoder.sw" type="video/x-vnd.on2.vp8">
+	<MediaCodec name="OMX.google.vp8.decoder" type="video/x-vnd.on2.vp8">
             <Limit name="size" min="2x2" max="2048x2048" />
             <Limit name="alignment" value="2x2" />
             <Limit name="block-size" value="16x16" />
