@@ -20,6 +20,9 @@ ro.radio.noril=false
 #if need pppoe
 ro.net.pppoe=true
 
+# Low memory platform
+ro.config.low_ram=true
+
 #the prop is used for enable or disable
 #DD+/DD force output when HDMI EDID is not supported
 #by default,the force output mode is enabled.
