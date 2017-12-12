@@ -452,6 +452,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
     fw.disable_quota=true
 
 PRODUCT_PACKAGES += \
+    VendorOverlay
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.boot.vendor.overlay.theme=VendorOverlay
+
+PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0.vndk-sp\
     android.hardware.graphics.mapper@2.0.vndk-sp\
     android.hardware.graphics.common@1.0.vndk-sp\
