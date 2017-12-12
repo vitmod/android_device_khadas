@@ -82,7 +82,6 @@
 /sys/devices/platform/bt-dev/rfkill/rfkill0/type	        u:object_r:sysfs_bluetooth_writable:s0
 /sys/devices/bt-dev.*/rfkill/rfkill0/state		        u:object_r:sysfs_bluetooth_writable:s0
 /sys/devices/bt-dev.*/rfkill/rfkill0/type			u:object_r:sysfs_bluetooth_writable:s0
-/sys/devices/virtual/amhdmitx/amhdmitx0/aud_cap                 u:object_r:sysfs_audio_cap:s0
 
 /sys/class/video/disable_video					u:object_r:sysfs_video:s0
 /sys/class/vfm/map						u:object_r:sysfs_video:s0
@@ -93,7 +92,9 @@
 /sys/class/audiodsp/digital_codec       		        u:object_r:sysfs_digital_codec:s0
 /sys/class/audiodsp/audio_samesource    		        u:object_r:sysfs_audio_samesource:s0
 /sys/class/amhdmitx/amhdmitx0/aud_cap   		        u:object_r:sysfs_audio_cap:s0
-
+/sys/devices/virtual/amhdmitx/amhdmitx0/aud_cap                 u:object_r:sysfs_audio_cap:s0
+/sys/class/amhdmitx/amhdmitx0/aud_output_chs                    u:object_r:sysfs_aud_output_chs:s0
+/sys/devices/virtual/amhdmitx/amhdmitx0/aud_output_chs          u:object_r:sysfs_aud_output_chs:s0
 /sys/class/mpgpu/mpgpucmd                                       u:object_r:sysfs_mpgpu_cmd:s0
 /sys/power/early_suspend_trigger                                u:object_r:sysfs_power_trigger:s0
 
