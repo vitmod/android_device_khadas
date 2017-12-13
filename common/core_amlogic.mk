@@ -45,8 +45,7 @@ PRODUCT_PACKAGES += \
 
 ifneq ($(TARGET_BUILD_GOOGLE_ATV), true)
 PRODUCT_PACKAGES += \
-    PhotoTable \
-    Happycast_Tv
+    PhotoTable
 endif
 
 ifneq ($(TARGET_BUILD_GOOGLE_ATV), true)
