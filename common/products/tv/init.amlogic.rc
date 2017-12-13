@@ -27,6 +27,9 @@ on init
     chmod 666 /sys/class/video/disable_video
     chmod 666 /sys/class/tsync/enable
     chmod 666 /sys/class/tsync/pts_pcrscr
+    chmod 666 /sys/class/tsync/pts_audio
+    chmod 666 /sys/class/tsync/firstapts
+    chmod 666 /sys/class/tsync/event
     chmod 666 /sys/class/tsync/av_threshold_min
     chmod 666 /sys/class/video/screen_mode
     chmod 666 /sys/class/vdec/poweron_clock_level
@@ -102,9 +105,10 @@ on boot
     insmod  /vendor/lib/modules/ddr_window_64.ko
 
     chown media system /sys/class/tsync/pts_video
-    chown system mediadrm /sys/class/tsync/pts_audio
-    chown system mediadrm /sys/class/tsync/pts_pcrscr
-    chown system mediadrm /sys/class/tsync/event
+    chown mediadrm audio /sys/class/tsync/pts_audio
+    chown mediadrm audio /sys/class/tsync/pts_pcrscr
+    chown mediadrm audio /sys/class/tsync/event
+    chown mediadrm audio /sys/class/tsync/firstapts
     chown media system /sys/class/tsync/mode
     chown media system /sys/class/tsync/enable
     chown media system /sys/class/tsync/av_threshold_min
