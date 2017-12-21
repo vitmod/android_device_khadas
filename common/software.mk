@@ -67,5 +67,6 @@ endif
 ifeq ($(TARGET_BUILD_NETFLIX), true)
 PRODUCT_COPY_FILES += \
 	device/amlogic/common/droidlogic.software.netflix.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/droidlogic.software.netflix.xml
+endif
 
 $(call inherit-product-if-exists, external/hyphenation-patterns/patterns.mk)
